@@ -1,0 +1,54 @@
+
+Perubahan isi file,
+-view/template/navbar.php
+-view/admin/template/navbar.php
+-view/home/index.php
+-view/agenda/index.php
+-view/admin/anggota/index.php
+-view/admin/anggota/ubahAnggota.php
+-view/admin/anggota/tambahAnggota.php
+-view/admin/galeri/index.php
+-view/admin/galeri/detail.php
+-view/admin/carousel/index.php
+-view/admin/carousel/ubahCarousel.php
+-view/admin/carousel/tambahCarousel.php
+-config/routes.php  
+-config/autoload.php  
+-controllers/admin.php
+-controllers/AnggotaAdmin.php
+-controllers/CarouselAdmin.php
+-controllers/GaleriAdmin.php
+-controllers/ArtikelAdmin.php
+-models/mAdmin.php
+-models/mAnggota.php
+-models/mCarousel.php
+
+
+dan penambahan folder/file
+-membuat folder agenda di view admin: view/admin/agenda
+-membuat folder pendaftaran di view admin: view/admin/pendaftaran
+-membuat folder pendaftaran di view public: view/pendaftaran
+-membuat controllers baru AgendaAdmin.php
+-tambah field role pada tabel admin, 
+-tambah field lokasi pada tabel agenda
+
+
+
+16/2/2022
+-view/admin/artikel/index.php
+-view/home/index.php
+-view/profil/struktur.php
+-view/admin/artikel/ubahArtikel.php
+-view/admin/artikel/tambahArtikel.php
+-controllers/CarouselAdmin.php
+-controllers/ArtikelAdmin.php
+-controllers/Admin.php
+-models/mCarousel.php
+-models/mArtikel.php
+-membuat tabel struktur
+-config/routes.php  
+-config/autoload.php 
+-create model MStruktur
+-view/admin/template/navbar
+-buat folder struktur di public/img/
+-update length deskripsi ditabel carousel
