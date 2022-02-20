@@ -52,4 +52,3 @@ dan penambahan folder/file
 -view/admin/template/navbar
 -buat folder struktur di public/img/
 -update length deskripsi ditabel carousel
--test
