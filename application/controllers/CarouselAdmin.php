@@ -23,13 +23,8 @@ class CarouselAdmin extends CI_Controller {
 		$this->form_validation->set_rules('judul', 'Judul', 'required');
 		$this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
 		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
-
-		// config upload file
-		$config['upload_path']   = './public/img/carousel';
-		$config['allowed_types'] = 'jpg|jpeg|png|gif';
-		$config['overwrite']  = TRUE;
-		// initialize library upload
-		$this->upload->initialize($config);
+		// panggil fungsi uploadGambar
+		$gambar = $this->uploadGambar("gambar", $this->upload->data('file_name'));
 
 		if ($this->form_validation->run() == FALSE) {
 
@@ -110,6 +105,22 @@ class CarouselAdmin extends CI_Controller {
 			$this->session->set_flashdata('alert','Diubah');
 			redirect('admin/carousel');
 		}
+	}
+
+	private function uploadGambar($inputName,$gambarDefault=null){
+		$config['upload_path']   = './public/img/carousel/';
+		$config['allowed_types'] = 'jpg|jpeg|png';
+		$config['encrypt_name']  = TRUE;
+		$this->upload->initialize($config);
+		// initialize library upload
+		if(isset($_FILES[$inputName]) && $_FILES[$inputName]['name'] && $this->upload->do_upload($inputName)){
+			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/carousel/". $gambarDefault ) ){
+				unlink(FCPATH  ."public/img/carousel/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
+			}
+			$fileGambar = $this->upload->data();
+			return $fileGambar['file_name'];
+		}
+		return $gambarDefault;
 	}
 
 	public function hapusCarousel($id){
