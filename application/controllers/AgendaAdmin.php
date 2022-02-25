@@ -18,6 +18,7 @@ class AgendaAdmin extends CI_Controller{
         $this->form_validation->set_rules('nama', 'Nama Kegiatan', 'required');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi Kegiatan', 'required');
         $this->form_validation->set_rules('waktu', 'Waktu Kegiatan', 'required');
+        $this->form_validation->set_rules('lokasi', 'Lokasi Kegiatan', 'required');
         $this->form_validation->set_rules('img', 'Gambar Kegiatan', 'required');
         // fungsi upload gambar
 		$agenda_img = $this->uploadGambar("img", $this->upload->data('file_name'));
