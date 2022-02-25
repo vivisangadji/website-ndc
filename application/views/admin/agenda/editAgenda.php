@@ -46,6 +46,17 @@
 	                   </div>
 	                 </div>
 	               </div>
+				   <div class="mb-3 row">
+	                 <label for="lokasi" class="col-sm-4 col-form-label">
+	                 	Lokasi Agenda
+	                 </label>
+	                 <div class="col-sm-10">
+	                   <input type="text" class="form-control" id="lokasi" name="lokasi" value="<?= $agenda->lokasi ?>" autofocus="on">
+	                   <div class="form-text text-danger">
+	                   	<?= form_error('lokasi') ?>
+	                   </div>
+	                 </div>
+	               </div> 
                    <div class="mb-3 row">
 	                 <label for="img" class="col-sm-4 col-form-label">
 	                 	Gambar Sebelumnya
