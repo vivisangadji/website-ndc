@@ -24,7 +24,7 @@ class CarouselAdmin extends CI_Controller {
 		$this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
 		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
 		// panggil fungsi uploadGambar
-		$gambar = $this->uploadGambar("gambar", $this->upload->data('file_name'));
+		$data_gambar = $this->uploadGambar("gambar", $this->upload->data('file_name'));
 
 		if ($this->form_validation->run() == FALSE) {
 
@@ -37,24 +37,10 @@ class CarouselAdmin extends CI_Controller {
 		if (!$this->upload->do_upload('gambar')) {
         	$error =  $this->upload->display_errors();
         }else {
-			$fileGambar = $this->upload->data();
-        	// compress image
-	        $config['image_library']='gd2';
-	        $config['source_image'] ='./public/img/carousel/'.$fileGambar['file_name'];
-	        $config['quality']      = '50%';
-	        $config['width']        = 750;
-	        $config['height']       = 500;
-	        $config['new_image']    = './public/img/carousel/'.$fileGambar['file_name'];
-	        // load library image_lib
-	        $this->load->library('image_lib', $config);
-	        $this->image_lib->resize();
-
 			// urutan
 			$carousel = $this->db->order_by("urutan", "DESC")->get("carousel")->result();
 			$getUrutan = $carousel[0]->urutan; 
 			
-	        // insert data
-        	$data_gambar = $fileGambar['file_name'];
 			$this->mCarousel->tambahCarousel($data_gambar, $getUrutan+=1);
 			$this->session->set_flashdata('alert','Ditambahkan');
 			redirect(base_url('admin/carousel'));
@@ -65,46 +51,26 @@ class CarouselAdmin extends CI_Controller {
 		$data['title'] = 'Ubah Carousel';
 		$data['carousel'] = $this->mCarousel->getCarouselById($id);
 
+		if ($this->input->method() == "post") {
+			$this->updateCarousel($id);
+		}
+		$this->load->view('admin/template/header',$data);
+		$this->load->view('admin/template/navbar');
+		$this->load->view('admin/carousel/ubahCarousel',$data);
+		$this->load->view('admin/template/footer');
+
+	}
+
+	public function updateCarousel($id) {
 		$this->form_validation->set_rules('judul', 'Judul', 'required');
 		$this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
-		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
+		if(!$this->form_validation->run()) return false;
 
-		// config upload file
-		$config['upload_path']   = './public/img/carousel';
-		$config['allowed_types'] = 'jpg|jpeg|png|gif';
-		$config['overwrite']  	 = TRUE;
-		// initialize library upload
-		$this->upload->initialize($config);
-
-		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('admin/template/header',$data);
-			$this->load->view('admin/template/navbar');
-			$this->load->view('admin/carousel/ubahCarousel',$data);
-			$this->load->view('admin/template/footer');
-			
-		}
-
-		if (!$this->upload->do_upload('gambar')) {
-        	$error =  $this->upload->display_errors();
-        }else {
-			$fileGambar = $this->upload->data();
-        	// compress image
-	        $config['image_library']='gd2';
-	        $config['source_image'] ='./public/img/carousel/'.$fileGambar['file_name'];
-	        $config['quality']      = '50%';
-	        $config['width']        = 750;
-	        $config['height']       = 500;
-	        $config['new_image']    = './public/img/carousel/'.$fileGambar['file_name'];
-	        // load library image_lib
-	        $this->load->library('image_lib', $config);
-	        $this->image_lib->resize();
-
-	        // insert data
-        	$data_gambar = $fileGambar['file_name'];
-			$this->mCarousel->ubahCarousel($data_gambar);
-			$this->session->set_flashdata('alert','Diubah');
-			redirect('admin/carousel');
-		}
+		$carousel = $this->db->get_where("carousel", ["id" => $id])->row();
+		$carousel_img = $this->uploadGambar("gambar", $carousel->img);
+		$this->mCarousel->ubahCarousel($carousel_img);
+		$this->session->set_flashdata("alert", "diubah");
+		redirect(base_url("admin/carousel"));
 	}
 
 	private function uploadGambar($inputName,$gambarDefault=null){
