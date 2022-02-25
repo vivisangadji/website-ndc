@@ -42,6 +42,7 @@ dan penambahan folder/file
 -view/admin/artikel/tambahArtikel.php
 -controllers/CarouselAdmin.php
 -controllers/ArtikelAdmin.php
+-controllers/StrukturAdmin.php
 -controllers/Admin.php
 -models/mCarousel.php
 -models/mArtikel.php

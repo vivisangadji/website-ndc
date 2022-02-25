@@ -129,14 +129,14 @@ class ArtikelAdmin extends CI_Controller {
 
 			$fileGambar = $this->upload->data();
 			// compress image
-			$config['image_library']='gd2';
-			$config['source_image'] ='./public/img/artikel/'.$fileGambar['file_name'];
-			$config['create_thumb'] = FALSE;
-			$config['maintain_ratio']= FALSE;
-			$config['quality']      = '50%';
-			$config['width']        = 750;
-			$config['height']       = 500;
-			$config['new_image']    = './public/img/artikel/'.$fileGambar['file_name'];
+			$config['image_library']	='gd2';
+			$config['source_image'] 	='./public/img/artikel/'.$fileGambar['file_name'];
+			$config['create_thumb'] 	= FALSE;
+			$config['maintain_ratio']	= FALSE;
+			$config['quality']      	= '50%';
+			$config['width']        	= 750;
+			$config['height']       	= 500;
+			$config['new_image']    	= './public/img/artikel/'.$fileGambar['file_name'];
 			// load library image_lib
 			$this->load->library('image_lib', $config);
 			$this->image_lib->resize();
