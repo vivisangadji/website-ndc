@@ -11,7 +11,8 @@ class mAgenda extends CI_Model{
 			'nama'		=> $this->input->post('nama'),
 			'img'		=> $gambar,
 			'deskripsi'	=> $this->input->post('deskripsi'),
-			'waktu'		=> $this->input->post('waktu')
+			'waktu'		=> $this->input->post('waktu'),
+			'lokasi'	=> $this->input->post('lokasi')
 		];
 
 		$this->db->insert('agenda', $data);
@@ -22,7 +23,8 @@ class mAgenda extends CI_Model{
 			'nama'		=> $this->input->post('nama'),
 			'img'		=> $gambar,
 			'deskripsi'	=> $this->input->post('deskripsi'),
-			'waktu'		=> $this->input->post('waktu')
+			'waktu'		=> $this->input->post('waktu'),
+			'lokasi'	=> $this->input->post('lokasi')
 		];
 
 		$this->db->where('id', $this->input->post('id'));
