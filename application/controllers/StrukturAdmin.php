@@ -24,7 +24,7 @@ class StrukturAdmin extends CI_Controller {
 			$this->load->view('admin/template/footer');
 		}
 		
-		if (!$this->upload->do_upload('struktur')) {
+		if (!$struktur) {
 			$error = array('error' => $this->upload->display_errors());
 		} else {
 			$this->db->insert('struktur', [
@@ -74,8 +74,8 @@ class StrukturAdmin extends CI_Controller {
 			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/struktur/". $gambarDefault ) ){
 				unlink(FCPATH  ."public/img/struktur/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
 			}
-			$fileGambar = $this->upload->data();
-			return $fileGambar['file_name'];
+			$gambarDefault = $this->upload->data();
+			return $gambarDefault['file_name'];
 		}
 		return $gambarDefault;
 	}
