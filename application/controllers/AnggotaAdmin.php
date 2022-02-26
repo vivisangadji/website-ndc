@@ -24,6 +24,8 @@ class AnggotaAdmin extends CI_Controller {
 		$this->form_validation->set_rules('angkatan_kampus', 'Field ini', 'required');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
 		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
+		// fungsi upload gambar
+		$gambar_anggota = 
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('admin/template/header',$data);
@@ -112,6 +114,21 @@ class AnggotaAdmin extends CI_Controller {
 		}
 	}
 	
+	private function uploadGambar($inputName,$gambarDefault=null){
+		$config['upload_path']   = './public/img/anggota/';
+		$config['allowed_types'] = 'jpg|jpeg|png';
+		$config['encrypt_name']  = TRUE;
+		$this->upload->initialize($config);
+		// initialize library upload
+		if(isset($_FILES[$inputName]) && $_FILES[$inputName]['name'] && $this->upload->do_upload($inputName)){
+			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/anggota/". $gambarDefault ) ){
+				unlink(FCPATH  ."public/img/anggota/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
+			}
+			$fileGambar = $this->upload->data();
+			return $fileGambar['file_name'];
+		}
+		return $gambarDefault;
+	}
 
 	public function hapusAnggota($id){
 		$this->mAnggota->hapusAnggota($id);
