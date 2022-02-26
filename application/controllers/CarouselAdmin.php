@@ -34,7 +34,7 @@ class CarouselAdmin extends CI_Controller {
 			$this->load->view('admin/template/footer');
 			
 		}
-		if (!$this->upload->do_upload('gambar')) {
+		if (!$data_gambar) {
         	$error =  $this->upload->display_errors();
         }else {
 			// urutan
@@ -83,8 +83,8 @@ class CarouselAdmin extends CI_Controller {
 			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/carousel/". $gambarDefault ) ){
 				unlink(FCPATH  ."public/img/carousel/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
 			}
-			$fileGambar = $this->upload->data();
-			return $fileGambar['file_name'];
+			$gambarDefault = $this->upload->data();
+			return $gambarDefault['file_name'];
 		}
 		return $gambarDefault;
 	}
