@@ -30,7 +30,7 @@ class AgendaAdmin extends CI_Controller{
             $this->load->view('admin/template/footer', $data);
         }
 
-        if (!$this->upload->do_upload('img')) {
+        if (!$agenda_img) {
         	$error =  $this->upload->display_errors();
         }else {
         	
@@ -77,8 +77,8 @@ class AgendaAdmin extends CI_Controller{
 			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/agenda/". $gambarDefault ) ){
 				unlink(FCPATH  ."public/img/agenda/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
 			}
-			$fileGambar = $this->upload->data();
-			return $fileGambar['file_name'];
+			$gambarDefault = $this->upload->data();
+			return $gambarDefault['file_name'];
 		}
 		return $gambarDefault;
 	}
