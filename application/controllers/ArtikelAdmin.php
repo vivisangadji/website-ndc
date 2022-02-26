@@ -25,13 +25,6 @@ class ArtikelAdmin extends CI_Controller {
 		$this->form_validation->set_rules('author_sampul', 'Gambar author', 'required');
 		$this->form_validation->set_rules('id_kategori', 'Kategori', 'required');
 		$this->form_validation->set_rules('id_subkategori[]', 'Sub Kategori', 'required');
-		// config upload file
-		$config['upload_path']   = './public/img/artikel';
-		$config['allowed_types'] = 'jpg|jpeg|png|gif';
-		$config['encrypt_name']  = TRUE;
-		// initialize library upload
-		$this->upload->initialize($config);
-
 		
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('admin/template/header', $data);
@@ -40,34 +33,13 @@ class ArtikelAdmin extends CI_Controller {
 			$this->load->view('admin/template/footer');
 		}
 		
-		if (!$this->upload->do_upload('sampul')) {
-        	$error =  $this->upload->display_errors();
+		// fungsi upload gambar
+		$author_sampul = $this->uploadGambar("author_sampul", $this->upload->data("file_name"));
+		if (!$author_sampul) {
+			return $error =  $this->upload->display_errors();
         }else {
-			$fileGambar = $this->upload->data();
-        	// compress image
-	        $config['image_library']='gd2';
-	        $config['source_image'] ='./public/img/artikel/'.$fileGambar['file_name'];
-	        $config['create_thumb'] = FALSE;
-	        $config['maintain_ratio']= FALSE;
-	        $config['quality']      = '50%';
-	        $config['width']        = 750;
-	        $config['height']       = 500;
-	        $config['new_image']    = './public/img/artikel/'.$fileGambar['file_name'];
-	        // load library image_lib
-	        $this->load->library('image_lib', $config);
-	        $this->image_lib->resize();
-
-			// script upload file samppul
-			$this->upload->do_upload('sampul');
-			$file1 = $this->upload->data();
-			$sampul = $file1['file_name'];
-			
-			// script uplaod file author sampul
-			$this->upload->do_upload('author_sampul');
-			$file2 = $this->upload->data();
-			$author_sampul = $file2['file_name'];
-
-	        // insert data
+			$this->upload->do_upload("sampul");
+			$sampul 	   = $this->upload->data("file_name");
 			$this->mArtikel->tambahArtikel($sampul, $author_sampul);
 			$this->session->set_flashdata('alert', 'Ditambahkan');
 			redirect(base_url('admin/artikel'));
@@ -89,7 +61,6 @@ class ArtikelAdmin extends CI_Controller {
 		$this->load->view('admin/template/navbar');
 		$this->load->view('admin/artikel/ubahArtikel', $data);
 		$this->load->view('admin/template/footer');
-
 	}
 
 	private function updateArtikel($id){
@@ -126,22 +97,8 @@ class ArtikelAdmin extends CI_Controller {
 			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/artikel/". $gambarDefault ) ){
 				unlink(FCPATH  ."public/img/artikel/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
 			}
-
-			$fileGambar = $this->upload->data();
-			// compress image
-			$config['image_library']	='gd2';
-			$config['source_image'] 	='./public/img/artikel/'.$fileGambar['file_name'];
-			$config['create_thumb'] 	= FALSE;
-			$config['maintain_ratio']	= FALSE;
-			$config['quality']      	= '50%';
-			$config['width']        	= 750;
-			$config['height']       	= 500;
-			$config['new_image']    	= './public/img/artikel/'.$fileGambar['file_name'];
-			// load library image_lib
-			$this->load->library('image_lib', $config);
-			$this->image_lib->resize();
-
-			return $fileGambar['file_name'];
+			$gambarDefault = $this->upload->data();
+			return $gambarDefault['file_name'];
 		}
 		return $gambarDefault;
 	}
