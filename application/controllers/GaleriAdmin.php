@@ -35,7 +35,7 @@ class GaleriAdmin extends CI_Controller {
 			$this->load->view('admin/template/footer');
         }
    	
-        if (!$this->upload->do_upload('sampul_kegiatan')) {
+        if (!$galeri_img) {
         	$error =  $this->upload->display_errors();
         }else {
 	        $this->mGaleri->tambahGaleri($galeri_img);
@@ -78,8 +78,8 @@ class GaleriAdmin extends CI_Controller {
 			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/galeri/". $gambarDefault ) ){
 				unlink(FCPATH  ."public/img/galeri/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
 			}
-			$fileGambar = $this->upload->data();
-			return $fileGambar['file_name'];
+			$gambarDefault = $this->upload->data();
+			return $gambarDefault['file_name'];
 		}
 		return $gambarDefault;
 	}
@@ -122,7 +122,7 @@ class GaleriAdmin extends CI_Controller {
 			$this->load->view('admin/template/footer');
 		}
 
-		if (!$this->upload->do_upload('gambar')){
+		if (!$data_gambar){
 		    $error = $this->upload->display_errors();
 		}else {
 			$this->mGaleri->tambahDetailGaleri($data_gambar);
