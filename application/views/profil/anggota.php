@@ -28,21 +28,21 @@
                         <img class="img-responsive" src="<?= base_url('public/img/anggota/'.$ang->gambar) ?>" width="100%">
                     </div>
                     <div class="mc-description" style="overflow-y: scroll;">
-	                        <table class="table table-borderless">
-							    <tr>
-							      <th scope="col">Angkatan</th>
-							      <td width="1px">:</td>
-							      <td scope="col"><?= $ang->angkatan_ndc ?>, <?= $ang->angkatan_kampus ?></td>
-							    </tr>
-							    <tr>
-							      <th scope="col">Jabatan</th>
-							      <td colspan="2">
-							      	<ul style="margin-left: -25px;">
-								      	<?= $ang->jabatan ?>
-								    </ul>
-								   </td>
-							    </tr>
-	                        </table>
+						<table class="table table-borderless">
+							<tr>
+								<th scope="col">Angkatan</th>
+								<td width="1px">:</td>
+								<td scope="col"><?= $ang->angkatan_ndc ?>, <?= $ang->angkatan_kampus ?></td>
+							</tr>
+							<tr>
+								<th scope="col">Jabatan</th>
+								<td colspan="2">
+								<ul style="margin-left: -25px;">
+									<?= $ang->jabatan ?>
+								</ul>
+								</td>
+							</tr>
+						</table>
                     </div>
                 </div>
                 <a class="mc-btn-action">
@@ -53,6 +53,7 @@
                     <a href="#" class="fab fa-fw fa-instagram rounded-circle"></a>
                 </div>
             </article>
+			<br>
      	</div>
      	<?php endforeach ?>
 	</div>
