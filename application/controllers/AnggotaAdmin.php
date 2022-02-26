@@ -24,42 +24,20 @@ class AnggotaAdmin extends CI_Controller {
 		$this->form_validation->set_rules('angkatan_kampus', 'Field ini', 'required');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
 		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
-		// fungsi upload gambar
-		$gambar_anggota = $this->uploadGambar("gambar", $this->upload->data("file_name"));
-
+		
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('admin/template/header',$data);
 			$this->load->view('admin/template/navbar');
 			$this->load->view('admin/anggota/tambahAnggota');
 			$this->load->view('admin/template/footer');
 		}
-
-		// config upload file
-		$config['upload_path']   = './public/img/anggota';
-		$config['allowed_types'] = 'jpg|jpeg|png|gif';
-		$config['encrypt_name']  = TRUE;
-		// initialize library upload
-		$this->upload->initialize($config);
-
-		if (!$this->upload->do_upload('gambar')) {
-        	$error =  $this->upload->display_errors();
-        } else {
-			$fileGambar = $this->upload->data();
-			// compress image
-			$config['image_library'] = 'gd2';
-			$config['source_image'] = './public/img/anggota/'.$fileGambar['file_name'];
-			$config['create_thumb'] = TRUE;
-			$config['maintain_ratio'] = TRUE;
-			$config['width']         = 750;
-			$config['height']       = 500;
-			$config['new_image']    = './public/img/anggota/'.$fileGambar['file_name'];
-
-			$this->load->library('image_lib', $config);
-			$this->image_lib->resize();
-
-			// insert data
-        	$data_gambar = $fileGambar['file_name'];
-			$this->mAnggota->tambahAnggota($data_gambar);
+		
+		// fungsi upload gambar
+		$gambar_anggota = $this->uploadGambar("gambar", $this->upload->data("file_name"));
+		if (!$gambar_anggota) {
+			return $error = $this->upload->display_errors();
+		} else {
+			$this->mAnggota->tambahAnggota($gambar_anggota);
 			$this->session->set_flashdata('alert','Ditambahkan');
 			redirect(base_url('admin/anggota' ));
 		}
@@ -124,10 +102,9 @@ class AnggotaAdmin extends CI_Controller {
 			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/anggota/". $gambarDefault ) ){
 				unlink(FCPATH  ."public/img/anggota/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
 			}
-			$fileGambar = $this->upload->data();
-			return $fileGambar['file_name'];
+			$gambarDefault = $this->upload->data();
+			return $gambarDefault['file_name'];
 		}
-		return $gambarDefault;
 	}
 
 	public function hapusAnggota($id){
