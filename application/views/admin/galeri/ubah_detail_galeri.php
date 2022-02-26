@@ -14,8 +14,15 @@
 	               <div class="mb-3 row">
  	                 <label for="id_galeri" class="col-sm-2 col-form-label">Kegiatan</label>
  	                 <select class="form-select" aria-label="Default select example" name="id_galeri" readonly>
-	 	                   <option value="<?= $galeri["id"] ?>"><?= $galeri["kegiatan"] ?>
-	 	                   </option>
+						<?php foreach ($kegiatan as $keg) : ?>
+							<?php if($detail_galeri->id_galeri == $keg->id) : ?>
+								<option value="<?= $keg->id ?>" selected><?= $keg->kegiatan ?>
+								</option>
+							<?php else : ?>
+								<option value="<?= $keg->id ?>"><?= $keg->kegiatan ?>
+								</option>
+							<?php endif; ?>		
+						<?php endforeach; ?>
  	                 </select>
                     <div class="form-text text-danger"><?= form_error('id_galeri') ?></div>
 	               </div>

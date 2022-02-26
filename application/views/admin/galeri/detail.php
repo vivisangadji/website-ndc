@@ -14,7 +14,7 @@
           <h3 class="text-center">Detail galeri berdasarkan kegiatan</h3>
         <div class="row mt-3">
           <table class="table table-bordered">
-            <a href="<?= base_url('admin/tambah-detail-galeri/'.$detail_galeri[0]->id_galeri) ?>" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah
+            <a href="<?= base_url('admin/tambah-detail-galeri/'.$id_galeri) ?>" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah
             </a>
             <tr>
               <th>Nama Kegiatan</th>
@@ -28,7 +28,7 @@
                     <img src="<?= base_url('public/img/galeri/'.$detail->gambar) ?>" width="100">    
                   </td>
                   <td>
-                    <a class="btn btn-success" href="<?= base_url('admin/ubah-detail-galeri/'.$detail->id_galeri.'/'.$detail->id)  ?>">Edit</a>
+                    <a class="btn btn-success" href="<?= base_url('admin/ubah-detail-galeri/'.$detail->id)  ?>">Edit</a>
                     <a class="btn btn-danger" href="<?= base_url('admin/hapus-detail-galeri/'.$detail->id_galeri.'/'.$detail->id)  ?>" onclick="return confirm('Yakin mau dihapus?')">Hapus</a>
                   </td>
                 </tr>

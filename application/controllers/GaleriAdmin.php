@@ -25,13 +25,9 @@ class GaleriAdmin extends CI_Controller {
 		$data['galeri'] = $this->mGaleri->getGaleri();
 		$this->form_validation->set_rules('kegiatan', 'Nama kegiatan', 'required');
 		$this->form_validation->set_rules('sampul_kegiatan', 'Sampul', 'required');
-		// config upload file
-		$config['upload_path']   = './public/img/galeri';
-		$config['allowed_types'] = 'jpg|jpeg|png';
-		$config['encrypt_name']  = TRUE;
-		// initialize library upload
-		$this->upload->initialize($config);
-
+		// fungsi upload gambar
+		$galeri_img = $this->uploadGambar("sampul_kegiatan", $this->upload->data('file_name'));
+		
         if ($this->form_validation->run() == FALSE) {       	
 			$this->load->view('admin/template/header',$data);
 			$this->load->view('admin/template/navbar');
@@ -42,23 +38,7 @@ class GaleriAdmin extends CI_Controller {
         if (!$this->upload->do_upload('sampul_kegiatan')) {
         	$error =  $this->upload->display_errors();
         }else {
-        	$fileGambar = $this->upload->data();
-        	// compress image
-	        $config['image_library']='gd2';
-	        $config['source_image'] ='./public/img/galeri/'.$fileGambar['file_name'];
-	        $config['create_thumb'] = FALSE;
-	        $config['maintain_ratio']= FALSE;
-	        $config['quality']      = '50%';
-	        $config['width']        = 600;
-	        $config['height']       = 400;
-	        $config['new_image']    = './public/img/galeri/'.$fileGambar['file_name'];
-	        // load library image_lib
-	        $this->load->library('image_lib', $config);
-            $this->image_lib->resize();
-
-	        // insert data
-        	$data_gambar = $fileGambar['file_name'];
-	        $this->mGaleri->tambahGaleri($data_gambar);
+	        $this->mGaleri->tambahGaleri($galeri_img);
 	        $this->session->set_flashdata('alert', 'Ditambahkan');
 	        redirect(base_url('admin/galeri'));
         }
@@ -67,44 +47,41 @@ class GaleriAdmin extends CI_Controller {
 	public function ubahGaleri($id){
 		$data['title']  = 'Ubah data galeri';
 		$data['galeri'] = $this->mGaleri->getGaleriById($id);
-		$this->form_validation->set_rules('kegiatan', 'Nama kegiatan', 'required');
-		$this->form_validation->set_rules('sampul_kegiatan', 'Sampul', 'required');
-		// config upload file
-		$config['upload_path']   = './public/img/galeri';
-		$config['allowed_types'] = 'jpg|jpeg|png';
-		// initialize library upload
-		$this->upload->initialize($config);
-
-        if ($this->form_validation->run() == FALSE) {
-			$this->load->view('admin/template/header',$data); 
-			$this->load->view('admin/template/navbar'); 
-			$this->load->view('admin/galeri/ubah_galeri',$data); 
-			$this->load->view('admin/template/footer'); 
+		
+		if ($this->input->method() == "post") {
+			$this->updateGaleri($id);
 		}
+		$this->load->view('admin/template/header',$data); 
+		$this->load->view('admin/template/navbar'); 
+		$this->load->view('admin/galeri/ubah_galeri',$data); 
+		$this->load->view('admin/template/footer'); 
+	}
 
-		if (!$this->upload->do_upload('sampul_kegiatan')) {
-			$eror = $this->upload->display_errors();
-		} else {
+	public function updateGaleri($id){
+		$this->form_validation->set_rules('kegiatan', 'Nama kegiatan', 'required');
+		if(!$this->form_validation->run()) return false;
+
+		$galeri = $this->db->get_where("galeri", ["id" => $id])->row();
+		$galeri_img = $this->uploadGambar("sampul_kegiatan", $galeri->sampul);
+		$this->mGaleri->ubahGaleri($galeri_img);
+		$this->session->set_flashdata('alert', 'Diubah');
+		redirect(base_url('admin/galeri'));
+	}
+
+	private function uploadGambar($inputName,$gambarDefault=null){
+		$config['upload_path']   = './public/img/galeri/';
+		$config['allowed_types'] = 'jpg|jpeg|png';
+		$config['encrypt_name']  = TRUE;
+		$this->upload->initialize($config);
+		// initialize library upload
+		if(isset($_FILES[$inputName]) && $_FILES[$inputName]['name'] && $this->upload->do_upload($inputName)){
+			if($gambarDefault && $gambarDefault!="default.png" && is_file(FCPATH ."public/img/galeri/". $gambarDefault ) ){
+				unlink(FCPATH  ."public/img/galeri/". $gambarDefault); //Delete gambar sebelumnya jika ada gambar baru
+			}
 			$fileGambar = $this->upload->data();
-			// compress image
-			$config['image_library'] = 'gd2'; 
-			$config['source_image']  = './public/img/galeri/'.$fileGambar['file_name']; 
-			$config['create_thumb']  = FALSE;
-	        $config['maintain_ratio']= FALSE;
-	        $config['quality']       = '50%';
-	        $config['width']         = 750;
-	        $config['height']        = 500;
-	        $config['new_image']     = './public/img/galeri/'.$fileGambar['file_name'];
-	        // load library image_lib
-	        $this->load->library('image_lib', $config);
-	        $this->image_lib->resize();
-
-			// ubah data
-			$data_gambar = $fileGambar['file_name'];
-        	$this->mGaleri->ubahGaleri($data_gambar);
-        	$this->session->set_flashdata('alert', 'Diubah');
-        	redirect(base_url('admin/galeri'));
-		}   
+			return $fileGambar['file_name'];
+		}
+		return $gambarDefault;
 	}
 
 	public function hapusGaleri($id){
@@ -122,6 +99,7 @@ class GaleriAdmin extends CI_Controller {
 	public function detailGaleri($id){
 		$data['title'] 		   = 'Detail Galeri';
 		$data['detail_galeri'] = $this->mGaleri->getDetailGaleri($id);
+		$data['id_galeri'] 	   = $this->uri->segment('3'); // mengambil parameter id_galeri dari url
 
 		$this->load->view('admin/template/header', $data);
 		$this->load->view('admin/template/navbar');
@@ -134,13 +112,8 @@ class GaleriAdmin extends CI_Controller {
 		$data['galeri'] = $this->mGaleri->getGaleriById($id);
 		$this->form_validation->set_rules('id_galeri', 'Field ini', 'required');
 		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
-
-		// config upload file
-		$config['upload_path']    = './public/img/galeri';
-        $config['allowed_types']  = 'jpeg|jpg|png';
-        $config['encrypt_name']   = TRUE;
-		// initialize library upload
-		$this->upload->initialize($config);
+		// fungsi upload gambar
+		$data_gambar = $this->uploadGambar("gambar", $this->upload->data('file_name'));
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('admin/template/header',$data);
@@ -152,77 +125,43 @@ class GaleriAdmin extends CI_Controller {
 		if (!$this->upload->do_upload('gambar')){
 		    $error = $this->upload->display_errors();
 		}else {
-			$filename = $this->upload->data();
-			// Compress image
-			$config['image_library']  = 'gd2';
-			$config['source_image']   = './public/img/galeri/'.$filename['file_name'];
-			$config['quality']        = '50%';
-			$config['create_thumb']   = FALSE;
-			$config['maintain_ratio'] = TRUE;
-			$config['width']          = 750;
-			$config['height']         = 500;
-			$config['new_image']      = './public/img/galeri/'.$filename['file_name'];
-			$this->load->library('image_lib', $config);
-			$this->image_lib->resize(); 
-
-			//insert data
-			$image = $filename['file_name'];
-			$this->mGaleri->tambahDetailGaleri($image);
+			$this->mGaleri->tambahDetailGaleri($data_gambar);
 			$this->session->set_flashdata('alert','Ditambahkan');
-			redirect(base_url('admin/galeri/detail/'.$id ));
+			redirect(base_url('admin/detail-galeri/'.$id ));
 		}
 	}
 
 	// id_galeri:tabel galeri, id_detail:tabel detail_galeri
-	public function ubahDetailGaleri($id_galeri, $id_detail){
+	public function ubahDetailGaleri($id_detail){
 		$data['title'] 		     = 'Ubah detail galeri';
 		$data['detail_galeri']   = $this->mGaleri->getDetailGaleriById($id_detail);
-		$data['galeri'] 	     = $this->mGaleri->getGaleriById($id_galeri);
-		$this->form_validation->set_rules('id_galeri', 'Field ini', 'required');
-		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
-
-		// config upload file
-		$config['upload_path']   = './public/img/galeri';
-        $config['allowed_types'] = 'jpeg|jpg|png';
-        $config['encrypt_name']  = TRUE;
-		// initialize library upload
-		$this->upload->initialize($config);
-
-        if ($this->form_validation->run() == FALSE) {
-			$this->load->view('admin/template/header',$data); 
-			$this->load->view('admin/template/navbar'); 
-			$this->load->view('admin/galeri/ubah_detail_galeri', $data); 
-			$this->load->view('admin/template/footer'); 
+		$data['kegiatan']		 = $this->db->get("galeri")->result();
+		
+		if ($this->input->method() == "post") {
+			$this->updateDetailGaleri($id_detail);
 		}
-
-        if (!$this->upload->do_upload('gambar')){
-            $error = $this->upload->display_errors();
-        }else {
-        	$fileGambar = $this->upload->data();
-        	// compress image
-        	$config['image_library'] = 'gd2';
-        	$config['source_image']  = './public/img/galeri'.$fileGambar['file_name'];
-        	$config['quality']       = '50%';
-        	$config['width']         = 750;
-        	$config['height']        = 500;
-        	$config['new_image']     = './public/img/galeri'.$fileGambar['file_name'];
-        	// load library image_lib
-        	$this->load->library('image_lib',$config);
-        	$this->image_lib->resize();
-
-        	// ubah data
-        	$image = $fileGambar['file_name'];
-        	$this->mGaleri->ubahDetailGaleri($image);
-        	$this->session->set_flashdata('alert', 'Diubah');
-        	redirect(base_url('admin/galeri/detail/'.$id_galeri));
-        }
-
+		$this->load->view('admin/template/header',$data); 
+		$this->load->view('admin/template/navbar'); 
+		$this->load->view('admin/galeri/ubah_detail_galeri', $data); 
+		$this->load->view('admin/template/footer'); 		
+	}
+	
+	public function updateDetailGaleri($id_detail) {
+		$this->form_validation->set_rules('id_galeri', 'Field ini', 'required');
+		if(!$this->form_validation->run()) return false;
+		
+		$id_galeri = $this->input->post("id_galeri");
+		$detail_galeri = $this->db->get_where("detail_galeri", ["id" => $id_detail])->row();
+		$image = $this->uploadGambar("gambar", $detail_galeri->gambar);
+		$this->mGaleri->ubahDetailGaleri($image);
+		$this->session->set_flashdata('alert', 'Diubah');
+		redirect(base_url('admin/detail-galeri/'.$id_galeri));
 	}
 
 	public function hapusDetailGaleri($id_galeri, $id_detail){
 		$this->mGaleri->hapusDetailGaleri($id_detail);
 		$this->session->set_flashdata('alert','Dihapus');
-		redirect(base_url('admin/galeri/detail/'.$id_galeri));
+		redirect(base_url('admin/detail-galeri/'.$id_galeri));
 	}
 // ################ /.CRUD DATA DETAIL GALERI #####################//
 

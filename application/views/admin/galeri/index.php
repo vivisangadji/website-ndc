@@ -24,7 +24,7 @@
             <?php foreach ($galeri as $gal): ?>
               <tr>
                 <td>
-                  <a href="<?= base_url('admin/galeri/detail/'.$gal->id) ?>">
+                  <a href="<?= base_url('admin/detail-galeri/'.$gal->id) ?>">
                     <?= $gal->kegiatan ?>
                   </a>
                 </td>
