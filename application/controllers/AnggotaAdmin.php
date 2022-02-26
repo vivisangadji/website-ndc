@@ -25,7 +25,7 @@ class AnggotaAdmin extends CI_Controller {
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
 		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
 		// fungsi upload gambar
-		$gambar_anggota = 
+		$gambar_anggota = $this->uploadGambar("gambar", $this->upload->data("file_name"));
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('admin/template/header',$data);
