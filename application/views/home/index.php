@@ -57,7 +57,7 @@
 				  <img src="<?= base_url('public/img/artikel/'.$artikel->sampul) ?>" class="card-img-top" alt="...">
 				  <div class="card-body">
 				    <h5 class="card-title"><?= $artikel->judul ?></h5>
-				    <a href="#" class="card-link text-decoration-none">Baca Selengkapnya <i class="fas fa-angle-right"></i></a>
+				    <a href="<?= base_url('artikel/detail/').''.$artikel->id ?>" class="card-link text-decoration-none">Baca Selengkapnya <i class="fas fa-angle-right"></i></a>
 				  </div>
 				</div>
 			</div>
