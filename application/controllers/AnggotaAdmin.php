@@ -87,6 +87,11 @@ class AnggotaAdmin extends CI_Controller {
 	}
 
 	public function hapusAnggota($id){
+		$item = $this->db->get_where("anggota", ["id" => $id])->row();
+		if ($item->gambar != null) {
+			$target_file = "./public/img/anggota/". $item->gambar;
+			unlink($target_file);
+		}
 		$this->mAnggota->hapusAnggota($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/anggota'));
