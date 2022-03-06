@@ -4,14 +4,14 @@
 			<div class="col-sm-12 col-lg-8 mb-2">
 				<!-- content post -->
 					<div class="card rounded">
-						<img src="<?= base_url('public/img/').''.$detail_artikel->sampul ?>" class="card-img-top" alt="CI">
+						<img src="<?= base_url('public/img/artikel/').''.$detail_artikel->sampul ?>" class="card-img-top" alt="CI">
 						<div class="card-body p-md-5">
 							<h3 class="card-title">
 								<?= $detail_artikel->judul ?>	
 							</h3>
 							<div class="row">
 								<div class="col">
-									<img src="<?= base_url('public/img/').''.$detail_artikel->author_sampul ?>" class="rounded-circle" width="40">
+									<img src="<?= base_url('public/img/artikel/').''.$detail_artikel->author_sampul ?>" class="rounded-circle" width="40">
 									<a href="#" class="text-dark" style="text-decoration: none;">
 										<?= $detail_artikel->author ?>	
 									</a> -
@@ -30,7 +30,7 @@
 								<?php endforeach ?>
 							</div>
 							<hr>
-							<p class="card-text" style="text-align: justify;">		<?= $detail_artikel->konten ?>
+							<p class="card-text" style="text-align: justify;"><?= $detail_artikel->konten ?>
 							</p>
 						</div>
 						<div class="card-footer row text-center ">
@@ -79,7 +79,7 @@
 						    			</small>
 					    			</div>
 					    			<div class="col-4">
-					    				<img src="<?= base_url('public/img/'.$artikels->sampul) ?>" class="rounded" height="60"  width="100%">
+					    				<img src="<?= base_url('public/img/artikel/'.$artikels->sampul) ?>" class="rounded" height="60"  width="100%">
 					    			</div>
 					    		</div>
 					    	</a>

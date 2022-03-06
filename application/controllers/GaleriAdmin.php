@@ -85,6 +85,11 @@ class GaleriAdmin extends CI_Controller {
 	}
 
 	public function hapusGaleri($id){
+		$item = $this->db->get_where("galeri", ["id" => $id])->row();
+		if ($item->sampul != null) {
+			$target_file = "./public/img/galeri/". $item->sampul;
+			unlink($target_file);
+		}
 		$this->mGaleri->hapusGaleri($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/galeri'));
@@ -159,6 +164,11 @@ class GaleriAdmin extends CI_Controller {
 	}
 
 	public function hapusDetailGaleri($id_galeri, $id_detail){
+		$item = $this->db->get_where("detail_galeri", ["id" => $id_detail])->row();
+		if ($item->gambar != null) {
+			$target_file = "./public/img/galeri/". $item->gambar;
+			unlink($target_file);
+		}
 		$this->mGaleri->hapusDetailGaleri($id_detail);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/detail-galeri/'.$id_galeri));
