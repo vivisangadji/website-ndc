@@ -90,6 +90,11 @@ class CarouselAdmin extends CI_Controller {
 	}
 
 	public function hapusCarousel($id){
+		$item = $this->db->get_where("carousel", ["id" => $id])->row();
+		if ($item->img != null) {
+			$target_file = "./public/img/carousel/". $item->img;
+			unlink($target_file);
+		}
 		$this->mCarousel->hapusCarousel($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/carousel'));
