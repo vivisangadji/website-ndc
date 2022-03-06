@@ -104,6 +104,13 @@ class ArtikelAdmin extends CI_Controller {
 	}
 
 	public function hapusArtikel($id){
+		$item = $this->db->get_where("artikel", ["id" => $id])->row();
+		if ($item->sampul != null && $item->author_sampul != null) {
+			$sampul 	   = "./public/img/artikel/". $item->sampul;
+			$author_sampul = "./public/img/artikel/". $item->author_sampul;
+			unlink($sampul);
+			unlink($author_sampul);
+		}
 		$this->mArtikel->hapusArtikel($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/artikel'));
