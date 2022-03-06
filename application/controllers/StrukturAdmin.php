@@ -81,6 +81,11 @@ class StrukturAdmin extends CI_Controller {
 	}
 
 	public function hapusStruktur($id){
+		$item = $this->db->get_where("struktur", ["id" => $id])->row();
+		if ($item->img != null) {
+			$target_file = "./public/img/struktur/". $item->img;
+			unlink($target_file);
+		}
 		$this->db->where('id', $id)->delete('struktur');
 		$this->session->set_flashdata('alert','dihapus');
 		redirect(base_url('admin/struktur'));
