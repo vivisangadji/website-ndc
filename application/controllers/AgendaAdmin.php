@@ -84,6 +84,11 @@ class AgendaAdmin extends CI_Controller{
 	}
 	
 	public function hapusAgenda($id){
+		$item = $this->db->get_where("agenda", ["id" => $id])->row();
+		if ($item->img != null) {
+			$target_file = "./public/img/agenda/". $item->img;
+			unlink($target_file);
+		}
 		$this->mAgenda->hapusAgenda($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/agenda'));
