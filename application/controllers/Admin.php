@@ -6,7 +6,6 @@ class Admin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('form_validation');
-
 	}
 
 	public function index(){
@@ -15,10 +14,15 @@ class Admin extends CI_Controller {
 		if ($this->session->userdata('status') != 'login') {
 			redirect(base_url('admin/login'));
 		}else {
-			$this->load->view('admin/template/header',$data);
-			$this->load->view('admin/template/navbar', $data);
-			$this->load->view('admin/index', $data);
-			$this->load->view('admin/template/footer');
+			if ($this->session->userdata("roles") != "admin") {
+				redirect(base_url("admin/login"));
+			}else {
+				$this->load->view('admin/template/header',$data);
+				$this->load->view('admin/template/navbar', $data);
+				$this->load->view('admin/index', $data);
+				$this->load->view('admin/template/footer');
+			}
+			
 		}
 
 	}
@@ -67,8 +71,13 @@ class Admin extends CI_Controller {
 		$data['title']	= 'Data Pendaftaran';
 		$data['pendaftars']	= $this->MPendaftaran->getDataPendaftar();
 
-		$this->load->view('admin/template/header', $data);
-		$this->load->view('admin/pendaftaran/index', $data);
+		if ($this->session->userdata("roles") != "admin-pendaftaran") {
+			redirect(base_url("admin/login"));
+		} else {
+			$this->load->view('admin/template/header', $data);
+			$this->load->view('admin/pendaftaran/index', $data);
+		}
+		
 	}
 
 	public function tambahPendaftar(){
