@@ -15,7 +15,7 @@ class Artikel extends CI_Controller{
 		$data['kontaks']	  = $this->MFooter->getKontak();
 		$data['medsos']		  = $this->MFooter->getMedsos();
 		if ($this->input->post('keyword')){
-			$data['artikels'] = $this->mArtikel->cariDataArtikel();
+			$data['artikels'] = $this->MArtikel->cariDataArtikel();
 
 		}
 	
