@@ -14,7 +14,7 @@
 		            <div class="alert alert-warning mt-3" role="alert">
 		              Komentar berhasil <?= $this->session->flashdata('alert') ?> 
 		            </div>
-		        <?php endif ?>
+		        <?php $this->session->unset_userdata('alert'); endif; ?>
 				<form method="post" action="<?= base_url('kontak/saveKomentar') ?>">
 					<label class="text-white">Email</label>
 					<input type="email" name="email" class="form-control" value="<?= set_value('email') ?>">

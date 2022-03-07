@@ -8,7 +8,7 @@
             <div class="alert alert-success mt-3" role="alert">
               Service berhasil <?= $this->session->flashdata('alert') ?> 
             </div>
-          <?php endif ?>
+          <?php $this->session->unset_userdata('alert'); endif; ?>
         </div>
       </div> <!-- ./alert -->
       <div class="row">
