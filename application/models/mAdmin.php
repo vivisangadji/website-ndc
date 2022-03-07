@@ -1,6 +1,6 @@
 <?php 
 
-class mAdmin extends CI_Model{
+class MAdmin extends CI_Model{
 
 	public function cekLogin(){
 		$data = [

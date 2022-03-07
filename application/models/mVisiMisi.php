@@ -1,6 +1,6 @@
 <?php 
 
-class mVisiMisi extends CI_Model{
+class MVisiMisi extends CI_Model{
 	public function getVisiMisi(){
 		return $this->db->get('visi_misi')->row();
 	}

@@ -1,7 +1,7 @@
 <?php  
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class mArtikel extends CI_Model{
+class MArtikel extends CI_Model{
 
 	public function getArtikel(){
 		return $this->db->get('artikel')->result();

@@ -1,6 +1,6 @@
 <?php 
 
-class mSejarah extends CI_Model {
+class MSejarah extends CI_Model {
 
 	public function getSejarah(){
 		return $this->db->get('sejarah')->row();

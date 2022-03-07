@@ -1,6 +1,6 @@
 <?php 
 
-class mFooter extends CI_Model {
+class MFooter extends CI_Model {
 
 	/*######################## Service Footer ##########################*/
 	public function getService(){

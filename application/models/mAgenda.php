@@ -1,6 +1,6 @@
 <?php 
 
-class mAgenda extends CI_Model{
+class MAgenda extends CI_Model{
 	public function getAgenda(){
 		$this->db->order_by('waktu','DESC');
 		return $this->db->get('agenda')->result();

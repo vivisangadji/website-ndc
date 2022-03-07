@@ -1,7 +1,7 @@
 <?php  
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class mCarousel extends CI_Model{
+class MCarousel extends CI_Model{
 
 	public function getCarousel(){
 		$this->db->order_by('urutan','ASC');

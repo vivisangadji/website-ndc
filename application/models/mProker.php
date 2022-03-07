@@ -1,6 +1,6 @@
 <?php 
 
-class mProker extends CI_Model {
+class MProker extends CI_Model {
 
 	public function getProker(){
 		return $this->db->get('proker')->result();

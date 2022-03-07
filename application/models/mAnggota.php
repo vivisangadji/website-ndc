@@ -1,6 +1,6 @@
 <?php 
 
-class mAnggota extends CI_Model{
+class MAnggota extends CI_Model{
 	public function getAnggota(){
 		return $this->db->get('anggota')->result();
 	}

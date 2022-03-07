@@ -4,7 +4,7 @@ fungsi getDetailGaleri untuk menampilkan data di views galeri/detail atau halama
 fungsi getAllDetailGaleri untuk menampilkan data di views admin/galeri/detail
 */
 
-class mGaleri extends CI_Model {
+class MGaleri extends CI_Model {
 	public function getGaleri(){
 		return $this->db->get('galeri')->result();
 	}
