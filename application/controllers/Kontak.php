@@ -30,7 +30,7 @@ class Kontak extends CI_Controller{
 			$this->load->view('kontak/index.php');
 			$this->load->view('template/footer.php');
 		}else {
-			$this->mAdmin->saveKomentar();
+			$this->MAdmin->saveKomentar();
 			$this->session->set_flashdata('alert', 'Dikirim');
 			redirect(base_url('kontak'));
 		}
