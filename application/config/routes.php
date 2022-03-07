@@ -26,7 +26,7 @@ $route['admin/login'] 			           = 'Admin/loginAdmin';
 // Pendaftaran
 $route['admin-lk1/data-pendaftar'] 			   = 'Admin/getAllPendaftar';
 $route['admin-lk1/tambah-pendaftar'] 		   = 'Admin/tambahPendaftar';
-$route['admin-lk1/detail-pendaftar/(:any)']    = 'Admin/cetakData/$1';
+$route['admin-lk1/detail-pendaftar/(:any)']    = 'Admin/detail/$1';
 $route['admin-lk1/edit-pendaftar/(:any)']      = 'Admin/editData/$1';
 
 // STRUKTUR

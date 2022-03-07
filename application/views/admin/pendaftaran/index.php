@@ -61,7 +61,7 @@
                         <td><?= $pendaftar->alasan ?></td>
                         <td><?= $pendaftar->tgl_daftar ?></td>
                         <td>
-                            <a href="<?= base_url('admin-lk1/detail-pendaftar/'.$pendaftar->stb) ?>" class="btn btn-success">Cetak</a>
+                            <a href="<?= base_url('admin-lk1/detail-pendaftar/'.$pendaftar->stb) ?>" class="btn btn-success">Detail</a>
                             <a href="<?= base_url('admin-lk1/edit-pendaftar/'.$pendaftar->stb) ?>" class="btn btn-warning">Edit</a>
                         </td>
                     </tr>

@@ -10,7 +10,7 @@ class Pendaftaran extends CI_Controller {
 		$data['jurusan']	  = $this->MPendaftaran->getJurusan();
 
 		// form_validation
-		$this->form_validation->set_rules('stb', 'STB', 'required|is_unique[calon_anggota.stb]');
+		$this->form_validation->set_rules('stb', 'STB', 'required|is_unique[calon_anggota.stb]|min_length[6]');
 		$this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
 		$this->form_validation->set_rules('nama_panggilan', 'Nama Panggilan', 'required');
 		$this->form_validation->set_rules('tmpt_lahir', 'Tempat Lahir', 'required');

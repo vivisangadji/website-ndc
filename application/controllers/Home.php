@@ -13,6 +13,7 @@ class Home extends CI_Controller{
 		$data['divisi']		  = $this->MFooter->getDivisi();
 		$data['kontaks']	  = $this->MFooter->getKontak();
 		$data['medsos']		  = $this->MFooter->getMedsos();
+		$data["agenda"]		  = $this->db->order_by("waktu", "DESC")->limit(1)->get("agenda")->result();
 
 		// $data['artInfoit'] = $this->mArtikel->getArtikelByKategori(2)->result();
 		// $data['kategori'] = $this->mArtikel->getKategori()->row();

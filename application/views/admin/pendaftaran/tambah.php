@@ -111,8 +111,7 @@
                             <option value=""> --- Pilih --- </option>
                             <?php foreach ($jurusan as $j) : ?>
                                 <option value="<?= $j->nama_jurusan; ?>"><?= $j->nama_jurusan; ?></option>
-                            <?php endforeach;?>
-                            
+                            <?php endforeach;?>   
                             </select>
                             <div class="form-text text-danger">
                             <?= form_error('jurusan') ?>

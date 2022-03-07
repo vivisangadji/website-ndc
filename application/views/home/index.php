@@ -70,14 +70,18 @@
 			<div class="col-lg-8">
 				<h4 class="text-white">#Agenda yang akan datang</h4>
 				<div class="row">
-					<div class="col-lg-6 col-sm-12 p-2">
-						<div class="card p-1">
-							<img src="<?= base_url('public/img/') ?>img.png" class="card-img-top" alt="...">
-							<div class="card-footer text-center">
-								<a class="text-secondary" href="" title="Bagikan"><i class="far fa-share-square">Bagikan </i></a>
+					<?php foreach ($agenda as $a) : ?>
+						<div class="col-lg-6 col-sm-12 p-2">
+							<div class="card p-1">
+								<img src="<?= base_url('public/img/agenda/'.$a->img) ?>" class="card-img-top" alt="...">
+								<div class="card-footer text-center">
+									<span title="Kegiatan"><?= $a->nama ?></span>
+									<p class="text-secondary mb-0"><?= $a->deskripsi ?></p>
+									<span class="text-secondary">Lokasi: <?= $a->lokasi ?></span>
+								</div>
 							</div>
 						</div>
-					</div>
+					<?php endforeach; ?>
 				</div>
 			</div>
 		</div>

@@ -21,7 +21,7 @@
 			<?php foreach ($artikels as $artikel): ?>
 			<div class="col-md-4 d-flex align-items-stretch">
 				<div class="card mb-3 shadow p-1" data-aos="fade-right" data-aos-duration="1000">
-				  <img src="<?= base_url('public/img/').''.$artikel->sampul ?>" class="card-img-top" alt="...">
+				  <img src="<?= base_url('public/img/artikel/').''.$artikel->sampul ?>" class="card-img-top" alt="...">
 				  <div class="card-body">
 				    <h5 class="card-title"><?= $artikel->judul ?></h5>
 				    <a href="<?= base_url('artikel/detail/').''.$artikel->id ?>" class="card-link text-decoration-none">Baca Selengkapnya <i class="fas fa-angle-right"></i></a>

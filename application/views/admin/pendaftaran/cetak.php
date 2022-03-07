@@ -1,5 +1,22 @@
 <!-- <body onload="window.print()">     -->
     <!-- Main content -->
+    <style>
+        td {
+            font-size: 25px;
+        }
+        /* table {
+            position: relative;
+        }
+         .kotak-foto {
+            position: absolute;
+            border: 1px solid black;
+            height: 200px;
+            width: 180px;
+            top: 100%;
+            left: 55%;
+            margin-top: 30px;
+        } */
+    </style>
     <section class="content">
       <div class="container">
         <!-- Main row -->
@@ -18,15 +35,15 @@
                     </tr>
                     <tr>
                         <td>Nama Lengkap</td>
-                        <td>: <?= $detail->nama_lengkap ?></td>
+                        <td class="text-capitalize">: <?= $detail->nama_lengkap ?></td>
                     </tr>
                     <tr>
                         <td>Nama Panggilan</td>
-                        <td>: <?= $detail->nama_panggilan ?></td>
+                        <td class="text-capitalize">: <?= $detail->nama_panggilan ?></td>
                     </tr>
                     <tr>
                         <td>Tempat/Tanggal Lahir</td>
-                        <td>: <?= $detail->tmpt_lahir ?>, <?= $detail->tgl_lahir ?></td>
+                        <td class="text-capitalize">: <?= $detail->tmpt_lahir ?>, <?= $detail->tgl_lahir ?></td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
@@ -34,7 +51,7 @@
                     </tr>
                     <tr>
                         <td>Alamat</td>
-                        <td>: <?= $detail->alamat ?></td>
+                        <td class="text-capitalize">: <?= $detail->alamat ?></td>
                     </tr>
                     <tr>
                         <td>No HP (WA)</td>
@@ -53,6 +70,8 @@
                         <td>: <?= $detail->alasan ?></td>
                     </tr>
                 </div>
+                <!-- <div class="kotak-foto">
+                </div> -->
             </table>
           </div>
         </div>

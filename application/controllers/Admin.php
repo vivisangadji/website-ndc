@@ -109,7 +109,7 @@ class Admin extends CI_Controller {
 
 	}
 
-	public function cetakData($stb){
+	public function detail($stb){
 		$data['title'] = 'Detail Data Pendaftar';
 		$data['detail'] = $this->db->get_where('calon_anggota', ['stb'=>$stb])->row();
 		$this->load->view('admin/template/header', $data);
