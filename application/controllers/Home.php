@@ -5,14 +5,14 @@ class Home extends CI_Controller{
 
 	public function index(){
 		$nav['menu']          = ['aktif',['','','','','',''],['','',''],'','','',''];
-		$data['carousel']     = $this->mCarousel->getCarousel();
-		$data['artInfo']  	  = $this->mArtikel->getArtikelByKategori(1)->result();
-		$data['artTutorial']  = $this->mArtikel->getArtikelByKategori(2)->result();
-		$data['services']	  = $this->mFooter->getService();
-		$data['konsentrasi']  = $this->mFooter->getKonsentrasi();
-		$data['divisi']		  = $this->mFooter->getDivisi();
-		$data['kontaks']	  = $this->mFooter->getKontak();
-		$data['medsos']		  = $this->mFooter->getMedsos();
+		$data['carousel']     = $this->MCarousel->getCarousel();
+		$data['artInfo']  	  = $this->MArtikel->getArtikelByKategori(1)->result();
+		$data['artTutorial']  = $this->MArtikel->getArtikelByKategori(2)->result();
+		$data['services']	  = $this->MFooter->getService();
+		$data['konsentrasi']  = $this->MFooter->getKonsentrasi();
+		$data['divisi']		  = $this->MFooter->getDivisi();
+		$data['kontaks']	  = $this->MFooter->getKontak();
+		$data['medsos']		  = $this->MFooter->getMedsos();
 
 		// $data['artInfoit'] = $this->mArtikel->getArtikelByKategori(2)->result();
 		// $data['kategori'] = $this->mArtikel->getKategori()->row();

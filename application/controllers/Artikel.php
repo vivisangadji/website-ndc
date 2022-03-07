@@ -7,13 +7,13 @@ class Artikel extends CI_Controller{
 		$menu[$kategori] 	  = 'aktif';
 		$data['menu'] 		  = ['',['','','','','',''],$menu,'','','',''];
 		$data['title'] 	      = 'ARTIKEL';
-		$data['artikels'] 	  = $this->mArtikel->getArtikelByKategori($kategori)->result();
-		$data['kategori'] 	  = $this->mArtikel->getArtikelByKategori($kategori)->result();
-		$data['services']	  = $this->mFooter->getService();
-		$data['konsentrasi']  = $this->mFooter->getKonsentrasi();
-		$data['divisi']		  = $this->mFooter->getDivisi();
-		$data['kontaks']	  = $this->mFooter->getKontak();
-		$data['medsos']		  = $this->mFooter->getMedsos();
+		$data['artikels'] 	  = $this->MArtikel->getArtikelByKategori($kategori)->result();
+		$data['kategori'] 	  = $this->MArtikel->getArtikelByKategori($kategori)->result();
+		$data['services']	  = $this->MFooter->getService();
+		$data['konsentrasi']  = $this->MFooter->getKonsentrasi();
+		$data['divisi']		  = $this->MFooter->getDivisi();
+		$data['kontaks']	  = $this->MFooter->getKontak();
+		$data['medsos']		  = $this->MFooter->getMedsos();
 		if ($this->input->post('keyword')){
 			$data['artikels'] = $this->mArtikel->cariDataArtikel();
 
@@ -28,18 +28,18 @@ class Artikel extends CI_Controller{
 	public function detailArtikel($id){
 		$data['menu'] 			= ['',['','','','','',''],['aktif','',''],'','','',''];
 		$data['title'] 			= 'DETAIL ARTIKEL';
-		$data['detail_artikel'] = $this->mArtikel->getDetailArtikel($id);
-		$data['services']	  	= $this->mFooter->getService();
-		$data['konsentrasi']  	= $this->mFooter->getKonsentrasi();
-		$data['divisi']		  	= $this->mFooter->getDivisi();
-		$data['kontaks']	  	= $this->mFooter->getKontak();
-		$data['medsos']		  	= $this->mFooter->getMedsos();
-		$data['artikel_lain']	= $this->mArtikel->getRandomArtikel();
-		$data['AllSubKategori'] = $this->mArtikel->getAllSubKategori();
+		$data['detail_artikel'] = $this->MArtikel->getDetailArtikel($id);
+		$data['services']	  	= $this->MFooter->getService();
+		$data['konsentrasi']  	= $this->MFooter->getKonsentrasi();
+		$data['divisi']		  	= $this->MFooter->getDivisi();
+		$data['kontaks']	  	= $this->MFooter->getKontak();
+		$data['artikel_lain']	= $this->MArtikel->getRandomArtikel();
+		$data['AllSubKategori'] = $this->MArtikel->getAllSubKategori();
+		$data['medsos']		  	= $this->MFooter->getMedsos();
 		$subKategori 		  	= explode(',',$data['detail_artikel']->id_subkategori);
 		$data['subKategori'] 	= [];
 		foreach ($subKategori as $sk) {
-			array_push($data['subKategori'],$this->mArtikel->getSubKategori($sk)[0]);
+			array_push($data['subKategori'],$this->MArtikel->getSubKategori($sk)[0]);
 		}
 
 		$this->load->view('template/header.php', $data);

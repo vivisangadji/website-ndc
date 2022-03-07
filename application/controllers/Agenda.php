@@ -4,12 +4,12 @@ class Agenda extends CI_Controller{
 
 	public function index(){
 		$data['menu'] 		  = ['',['','','','','',''],['','',''],'aktif','','',''];
-		$data['agendas'] 	  = $this->mAgenda->getAgenda();
-		$data['services']	  = $this->mFooter->getService();
-		$data['konsentrasi']  = $this->mFooter->getKonsentrasi();
-		$data['divisi']		  = $this->mFooter->getDivisi();
-		$data['kontaks']	  = $this->mFooter->getKontak();
-		$data['medsos']		  = $this->mFooter->getMedsos();
+		$data['agendas'] 	  = $this->MAgenda->getAgenda();
+		$data['services']	  = $this->MFooter->getService();
+		$data['konsentrasi']  = $this->MFooter->getKonsentrasi();
+		$data['divisi']		  = $this->MFooter->getDivisi();
+		$data['kontaks']	  = $this->MFooter->getKontak();
+		$data['medsos']		  = $this->MFooter->getMedsos();
 		$data['title'] 		  = 'AGENDA';
 
 		$this->load->view('template/header.php', $data);
