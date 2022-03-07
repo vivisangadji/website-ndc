@@ -39,7 +39,7 @@
             <a href="<?= base_url('admin') ?>" class="nav-link <?php if($this->uri->uri_string() == 'admin') { echo 'active'; } ?>">
               <i class="nav-icon fas fa- fa-home"></i>
                <p>
-                HOME
+                Home
               </p>
             </a>
           </li>
@@ -117,7 +117,7 @@
           </li>
           <li class="nav-item">
             <a href="<?= base_url('admin/service') ?>" class="nav-link <?php if($this->uri->uri_string() == 'admin/service') { echo 'active'; } ?>">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-wrench"></i>
               <p>
                 Service Footer
               </p>
@@ -125,7 +125,7 @@
           </li>
           <li class="nav-item">
             <a href="<?= base_url('admin/konsentrasi') ?>" class="nav-link <?php if($this->uri->uri_string() == 'admin/konsentrasi') { echo 'active'; } ?>">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-graduation-cap"></i>
               <p>
                 Konsentrasi Footer
               </p>
@@ -133,7 +133,7 @@
           </li>
           <li class="nav-item">
             <a href="<?= base_url('admin/divisi') ?>" class="nav-link <?php if($this->uri->uri_string() == 'admin/divisi') { echo 'active'; } ?>">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Divisi Footer
               </p>
@@ -141,7 +141,7 @@
           </li>
           <li class="nav-item">
             <a href="<?= base_url('admin/kontak_medsos') ?>" class="nav-link <?php if($this->uri->uri_string() == 'admin/kontak_medsos') { echo 'active'; } ?>">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-address-card"></i>
               <p>
                 Kontak & Medsos Footer
               </p>
@@ -149,7 +149,7 @@
           </li>
           <li class="nav-item">
             <a href="<?= base_url('admin/komentar') ?>" class="nav-link <?php if($this->uri->uri_string() == 'admin/komentar') { echo 'active'; } ?>">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-comment-dots"></i>
               <p>
                 Komentar
               </p>
