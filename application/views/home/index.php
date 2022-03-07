@@ -44,7 +44,7 @@
 					</div>
 					<?php endforeach ?>
 				</div>
-		<center><a href="#" class="btn-sm warna-utama button">Lihat Lainnya</a></center>
+		<center><a href="<?= base_url("artikel/1") ?>" class="btn-sm warna-utama button">Lihat Lainnya</a></center>
 	</section>
 	<section class="container mt-4 mb-4">	
 		<h3 class="text-white">
@@ -63,7 +63,7 @@
 			</div>
 			<?php endforeach ?>
 		</div>
-		<center><a href="#" class="btn-sm warna-utama button">Lihat Lainnya</a></center>
+		<center><a href="<?= base_url("artikel/2") ?>" class="btn-sm warna-utama button">Lihat Lainnya</a></center>
 	</section>
 	<section class="container mt-4 mb-4">
 		<div class="row">
