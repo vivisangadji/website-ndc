@@ -137,10 +137,11 @@ class GaleriAdmin extends CI_Controller {
 	}
 
 	// id_galeri:tabel galeri, id_detail:tabel detail_galeri
-	public function ubahDetailGaleri($id_detail){
+	public function ubahDetailGaleri($id_detail, $id_kegiatan){
 		$data['title'] 		     = 'Ubah detail galeri';
 		$data['detail_galeri']   = $this->MGaleri->getDetailGaleriById($id_detail);
 		$data['kegiatan']		 = $this->db->get("galeri")->result();
+		$data['galeri'] = $this->MGaleri->getGaleriById($id_kegiatan);
 		
 		if ($this->input->method() == "post") {
 			$this->updateDetailGaleri($id_detail);

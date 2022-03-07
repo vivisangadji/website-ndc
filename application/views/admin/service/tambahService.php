@@ -17,6 +17,9 @@
 	                   <div class="form-text text-danger"><?= form_error('service') ?></div>
 	                 </div>
 	               </div>
+				   <a href="<?= base_url("admin/service") ?>" class="btn btn-danger float-right me-3">
+						Batal
+					</a>
 	               <button type="submit" class="btn btn-primary float-right me-5">Simpan
 	               </button>
 	               </form>

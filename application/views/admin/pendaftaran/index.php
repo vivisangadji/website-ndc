@@ -15,10 +15,17 @@
             <h1 class="text-center mt-3">
               Data Pendaftar
             </h1>
+            <!-- tombol logout -->
+            <div class="float-right">
+              <a href="<?= base_url('admin/logout') ?>" class="btn btn-danger text-white">
+                <i class="nav-icon fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+            <!-- /.tombol logout -->
             <table id="myTable" class="table table-striped">
                 <thead>
                     <a href="<?= base_url('admin-lk1/tambah-pendaftar') ?>" class="btn btn-primary mb-2">
-                      <i class="fas fa-plus"></i> Tambah
+                      <i class="fas fa-plus"></i> Tambah Pendaftar
                     </a>
                     <tr>
                         <th>NO.</th>

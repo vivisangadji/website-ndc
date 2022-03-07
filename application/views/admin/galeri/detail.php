@@ -28,7 +28,7 @@
                     <img src="<?= base_url('public/img/galeri/'.$detail->gambar) ?>" width="100">    
                   </td>
                   <td>
-                    <a class="btn btn-success" href="<?= base_url('admin/ubah-detail-galeri/'.$detail->id)  ?>">Edit</a>
+                    <a class="btn btn-success" href="<?= base_url('admin/ubah-detail-galeri/'.$detail->id. '/'.$this->uri->segment(3))  ?>">Edit</a>
                     <a class="btn btn-danger" href="<?= base_url('admin/hapus-detail-galeri/'.$detail->id_galeri.'/'.$detail->id)  ?>" onclick="return confirm('Yakin mau dihapus?')">Hapus</a>
                   </td>
                 </tr>

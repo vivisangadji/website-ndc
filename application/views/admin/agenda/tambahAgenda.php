@@ -68,8 +68,12 @@
 	                   </div>
 	                 </div>
 	               </div>
-	               <button type="submit" class="btn btn-primary float-right me-5">Simpan
-	               </button>
+				   <a href="<?= base_url("admin/agenda") ?>" class="btn btn-danger float-right me-3">
+					   Batal
+				   </a>
+	               <button type="submit" class="btn btn-primary float-right me-5">
+					   Simpan
+					</button>
 	               </form>
 	            </div>
 	          </div>	

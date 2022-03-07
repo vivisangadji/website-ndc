@@ -59,6 +59,9 @@
 	                   <div class="form-text text-danger"><?= form_error('gambar') ?></div>
 	                 </div>
 	               </div>
+				   <a href="<?= base_url("admin/anggota") ?>" class="btn btn-danger float-right me-3">
+						Batal
+					</a>
 	               <button type="submit" class="btn btn-primary float-right me-5">Ubah</button>
 	               </form>
 	            </div>

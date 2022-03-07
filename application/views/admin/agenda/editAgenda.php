@@ -76,7 +76,11 @@
 	                   </div>
 	                 </div>
 	               </div>
-	               <button type="submit" class="btn btn-primary float-right me-5">Ubah
+				   <a href="<?= base_url("admin/agenda") ?>" class="btn btn-danger float-right me-3">
+					   Batal
+				   </a>
+	               <button type="submit" class="btn btn-primary float-right me-5">
+					   Ubah
 	               </button>
 	               </form>
 	            </div>

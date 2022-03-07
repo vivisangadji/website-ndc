@@ -87,7 +87,7 @@ $route['admin/hapus-galeri/(:any)']         = 'GaleriAdmin/hapusGaleri/$1';
 // galeri detail
 $route['admin/detail-galeri/(:any)']       	        = 'GaleriAdmin/detailGaleri/$1';
 $route['admin/tambah-detail-galeri/(:any)']         = 'GaleriAdmin/tambahDetailGaleri/$1';
-$route['admin/ubah-detail-galeri/(:any)']           = 'GaleriAdmin/ubahDetailGaleri/$1';
+$route['admin/ubah-detail-galeri/(:any)/(:any)']    = 'GaleriAdmin/ubahDetailGaleri/$1/$2';
 $route['admin/hapus-detail-galeri/(:any)/(:any)']   = 'GaleriAdmin/hapusDetailGaleri/$1/$2';
 
 // service
