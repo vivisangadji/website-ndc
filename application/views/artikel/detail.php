@@ -40,7 +40,7 @@
 								</a>
 							</div> -->
 							<div class="col-6">
-								<a href="#" id="hover_yellow icon-comment" class="comment fs-5 text-decoration-none text-dark  hover_bold">
+								<a href="<?= base_url('kontak')?>" id="hover_yellow icon-comment" class="comment fs-5 text-decoration-none text-dark  hover_bold">
 								<i class="far fa-comment-alt"></i> Komentar
 								</a>
 							</div>

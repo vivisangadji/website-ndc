@@ -9,13 +9,16 @@
 	<div class="row pb-3">
 		<div class="col-md-6 col-sm-12">
 			<div>
-				<h4 class="text-white text-center">Hubungi Kami</h4>
+				<h4 class="text-white text-center">Hubungi Kami & Berikan Komentar</h4>
 		        <?php if($this->session->flashdata('alert')) : ?>
 		            <div class="alert alert-warning mt-3" role="alert">
 		              Komentar berhasil <?= $this->session->flashdata('alert') ?> 
 		            </div>
 		        <?php $this->session->unset_userdata('alert'); endif; ?>
 				<form method="post" action="<?= base_url('kontak/saveKomentar') ?>">
+					<label class="text-white">Nama</label>
+					<input type="text" name="nama" class="form-control" value="<?= set_value('nama') ?>">
+					<?= form_error('email', '<div class="form-text text-white">', '</div>'); ?>
 					<label class="text-white">Email</label>
 					<input type="email" name="email" class="form-control" value="<?= set_value('email') ?>">
 					<?= form_error('email', '<div class="form-text text-white">', '</div>'); ?>

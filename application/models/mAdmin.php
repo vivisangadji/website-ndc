@@ -17,6 +17,7 @@ class MAdmin extends CI_Model{
 
 	public function saveKomentar(){
 		$data = [
+			'nama' => htmlspecialchars($this->input->post('nama', true)),
 			'email' => htmlspecialchars($this->input->post('email', true)),
 			'pesan' => htmlspecialchars($this->input->post('pesan', true))
 		];

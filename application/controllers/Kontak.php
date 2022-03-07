@@ -21,6 +21,7 @@ class Kontak extends CI_Controller{
 
 	public function saveKomentar(){ // diproses di model mAdmin
 		$data['title'] = 'KONTAK';
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
 		$this->form_validation->set_rules('pesan', 'Pesan', 'required');
 

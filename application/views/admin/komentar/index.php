@@ -16,6 +16,7 @@
           <h3 class="my-3 text-center">Komentar</h3>
           <tr>
             <th>#</th>
+            <th>Nama</th>
             <th>Email</th>
             <th>Pesan</th>
             <th>Tanggal Update</th>
@@ -23,9 +24,13 @@
           <?php foreach ($komentar as $komen): ?>
           <tr>
             <td></td>
+            <td><?= $komen->nama ?></td>
             <td><?= $komen->email ?></td>
             <td><?= $komen->pesan ?></td>
             <td><?= $komen->last_update ?></td>
+            <td>
+              <a class="btn btn-danger" href="<?= base_url('admin/hapus_komentar/'.$komen->id) ?>" onclick="return confirm('Yakin mau dihapus?')">Hapus</a>
+            </td>
           </tr>
           <?php endforeach ?>
         </table>

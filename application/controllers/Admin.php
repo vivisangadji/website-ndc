@@ -55,6 +55,7 @@ class Admin extends CI_Controller {
 		redirect('admin/login');
 	}
 
+	// ############ KOMENTAR ADMIN #############
 	public function komentar(){
 		$data['title']    = 'Komentar';
 		$data['komentar'] = $this->MAdmin->getAllKomentar();
@@ -65,8 +66,15 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/template/footer');
 	}
 
+	public function hapus_komentar($id){
+		$this->db->delete("hubungi_kami", ["id" => $id]);
+		$this->session->set_flashdata("alert", "di hapus");
+		redirect(base_url("admin/komentar"));
+	}
+	// ############ AKHIR KOMENTAR ADMIN #############
 
-	// pendaftaran
+
+	// ################ PENDAFTARAN #############
 	public function getAllPendaftar(){
 		$data['title']	= 'Data Pendaftaran';
 		$data['pendaftars']	= $this->MPendaftaran->getDataPendaftar();
@@ -135,7 +143,7 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('jurusan', 'Jurusan', 'required');
 		$this->form_validation->set_rules('alasan', 'Alasan', 'required');
 		
-
+		
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('admin/template/header', $data);
 			$this->load->view('admin/pendaftaran/edit', $data);
@@ -146,5 +154,6 @@ class Admin extends CI_Controller {
 			redirect(base_url('admin-lk1/data-pendaftar'));
 		}
 	}
+	// ################ AKHIR PENDAFTARAN #############
 	
 }
