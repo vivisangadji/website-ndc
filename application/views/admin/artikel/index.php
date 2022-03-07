@@ -13,7 +13,7 @@
         </div>
         <div class="row mt-3">
           <table class="table table-bordered">
-            <a href="<?= base_url('admin/tambah-artikel') ?>" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah
+            <a href="<?= base_url('admin/tambah-artikel') ?>" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah Artikel
             </a>
             <tr>
               <th>Judul</th>

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class AgendaAdmin extends CI_Controller{
 
 	public function index(){
-		$data['agendas']	  = $this->mAgenda->getAgenda();
+		$data['agendas']	  = $this->MAgenda->getAgenda();
 		$data['title'] 		  = 'AGENDA ADMIN';
 
 		$this->load->view('admin/template/header', $data);
@@ -34,7 +34,7 @@ class AgendaAdmin extends CI_Controller{
         	$error =  $this->upload->display_errors();
         }else {
         	
-	        $this->mAgenda->tambahAgenda($agenda_img);
+	        $this->MAgenda->tambahAgenda($agenda_img);
 	        $this->session->set_flashdata('alert', 'Ditambahkan');
 	        redirect(base_url('admin/agenda'));
         }
@@ -62,7 +62,7 @@ class AgendaAdmin extends CI_Controller{
 
 		$agenda = $this->db->get_where('agenda', ['id' => $id])->row();
 		$agenda_img = $this->uploadGambar("img", $agenda->img);
-		$this->mAgenda->ubahAgenda($agenda_img);
+		$this->MAgenda->ubahAgenda($agenda_img);
 		$this->session->set_flashdata('alert', 'Diubah');
 		redirect(base_url('admin/agenda'));
 	}
@@ -89,7 +89,7 @@ class AgendaAdmin extends CI_Controller{
 			$target_file = "./public/img/agenda/". $item->img;
 			unlink($target_file);
 		}
-		$this->mAgenda->hapusAgenda($id);
+		$this->MAgenda->hapusAgenda($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/agenda'));
 	}

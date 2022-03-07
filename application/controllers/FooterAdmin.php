@@ -6,7 +6,7 @@ class FooterAdmin extends CI_Controller {
 	/*################# Service #####################*/
 	public function service(){
 		$data['title'] 	 = 'Service Footer';
-		$data['services'] = $this->mFooter->getService();
+		$data['services'] = $this->MFooter->getService();
 
 		$this->load->view('admin/template/header', $data);
 		$this->load->view('admin/template/navbar');
@@ -24,7 +24,7 @@ class FooterAdmin extends CI_Controller {
 			$this->load->view('admin/service/tambahService');
 			$this->load->view('admin/template/footer');
 		}else {
-			$this->mFooter->tambahService();
+			$this->MFooter->tambahService();
 			$this->session->set_flashdata('alert', 'Ditambahkan');
 			redirect(base_url('admin/service'));
 		}
@@ -32,7 +32,7 @@ class FooterAdmin extends CI_Controller {
 
 	public function ubahService($id){
 		$data['title']   = 'Ubah Data Service';
-		$data['service'] = $this->mFooter->getDataServiceById($id);
+		$data['service'] = $this->MFooter->getDataServiceById($id);
 		$this->form_validation->set_rules('service', 'Service', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
@@ -41,14 +41,14 @@ class FooterAdmin extends CI_Controller {
 			$this->load->view('admin/service/ubahService', $data);
 			$this->load->view('admin/template/footer');
 		}else {
-			$this->mFooter->ubahDataService($id);
+			$this->MFooter->ubahDataService($id);
 			$this->session->set_flashdata('alert', 'Diubah');
 			redirect(base_url('admin/service'));
 		}
 	}
 
 	public function hapusService($id){
-		$this->mFooter->hapusDataService($id);
+		$this->MFooter->hapusDataService($id);
 		$this->session->set_flashdata('alert', 'Dihapus');
 		redirect(base_url('admin/service'));
 	}
@@ -58,7 +58,7 @@ class FooterAdmin extends CI_Controller {
 	/*##################### konsentrasi ######################*/
 	public function konsentrasi(){
 		$data['title']  	   = 'Konsentrasi';
-		$data['konsentrasi']   = $this->mFooter->getKonsentrasi();
+		$data['konsentrasi']   = $this->MFooter->getKonsentrasi();
 
 		$this->load->view('admin/template/header', $data);
 		$this->load->view('admin/template/navbar');
@@ -76,7 +76,7 @@ class FooterAdmin extends CI_Controller {
 			$this->load->view('admin/konsentrasi/tambahKonsentrasi');
 			$this->load->view('admin/template/footer');
 		}else {
-			$this->mFooter->tambahKonsentrasi();
+			$this->MFooter->tambahKonsentrasi();
 			$this->session->set_flashdata('alert', 'Ditambahkan');
 			redirect(base_url('admin/konsentrasi'));
 		}
@@ -84,7 +84,7 @@ class FooterAdmin extends CI_Controller {
 
 	public function ubahKonsentrasi($id){
 		$data['title']       = 'Ubah Konsentrasi';
-		$data['konsentrasi'] = $this->mFooter->getKonsentrasiById($id);
+		$data['konsentrasi'] = $this->MFooter->getKonsentrasiById($id);
 		$this->form_validation->set_rules('konsentrasi', 'Konsentrasi', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
@@ -93,14 +93,14 @@ class FooterAdmin extends CI_Controller {
 			$this->load->view('admin/konsentrasi/ubahKonsentrasi', $data);
 			$this->load->view('admin/template/footer');
 		}else {
-			$this->mFooter->ubahKonsentrasi($id);
+			$this->MFooter->ubahKonsentrasi($id);
 			$this->session->set_flashdata('alert', 'Diubah');
 			redirect(base_url('admin/konsentrasi'));
 		}
 	}
 
 	public function hapusKonsentrasi($id){
-		$this->mFooter->hapusKonsentrasi($id);
+		$this->MFooter->hapusKonsentrasi($id);
 		$this->session->set_flashdata('alert', 'Dihapus');
 		redirect(base_url('admin/konsentrasi'));
 	}
@@ -111,7 +111,7 @@ class FooterAdmin extends CI_Controller {
 	/*##################### divisi ###################*/
 	public function divisi(){
 		$data['title']  = 'Divisi';
-		$data['divisi'] = $this->mFooter->getDivisi();
+		$data['divisi'] = $this->MFooter->getDivisi();
 
 		$this->load->view('admin/template/header', $data);
 		$this->load->view('admin/template/navbar');
@@ -129,7 +129,7 @@ class FooterAdmin extends CI_Controller {
 			$this->load->view('admin/divisi/tambahDivisi');
 			$this->load->view('admin/template/footer');
 		}else {
-			$this->mFooter->tambahDivisi();
+			$this->MFooter->tambahDivisi();
 			$this->session->set_flashdata('alert', 'Ditambahkan');
 			redirect(base_url('admin/divisi'));
 		}
@@ -137,7 +137,7 @@ class FooterAdmin extends CI_Controller {
 
 	public function ubahDivisi($id){
 		$data['title']       = 'Ubah Divisi';
-		$data['divisi']      = $this->mFooter->getDivisiById($id);
+		$data['divisi']      = $this->MFooter->getDivisiById($id);
 		$this->form_validation->set_rules('divisi', 'Divisi', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
@@ -146,14 +146,14 @@ class FooterAdmin extends CI_Controller {
 			$this->load->view('admin/divisi/ubahDivisi', $data);
 			$this->load->view('admin/template/footer');
 		}else {
-			$this->mFooter->ubahDivisi($id);
+			$this->MFooter->ubahDivisi($id);
 			$this->session->set_flashdata('alert', 'Diubah');
 			redirect(base_url('admin/divisi'));
 		}
 	}
 
 	public function hapusDivisi($id){
-		$this->mFooter->hapusDivisi($id);
+		$this->MFooter->hapusDivisi($id);
 		$this->session->set_flashdata('alert', 'Dihapus');
 		redirect(base_url('admin/divisi'));
 	}
@@ -164,7 +164,7 @@ class FooterAdmin extends CI_Controller {
 	/*##################### kontak & medsos ###################*/
 	public function kontakMedsos(){
 		$data['title']         = 'Kontak & Medsos';
-		$data['kontak_medsos'] = $this->mFooter->getAllKontakMedsos();
+		$data['kontak_medsos'] = $this->MFooter->getAllKontakMedsos();
 
 		$this->load->view('admin/template/header', $data);
 		$this->load->view('admin/template/navbar');
@@ -184,7 +184,7 @@ class FooterAdmin extends CI_Controller {
 			$this->load->view('admin/kontak_medsos/tambahKontakMedsos');
 			$this->load->view('admin/template/footer');
 		}else {
-			$this->mFooter->tambahKontakMedsos();
+			$this->MFooter->tambahKontakMedsos();
 			$this->session->set_flashdata('alert', 'Ditambahkan');
 			redirect(base_url('admin/kontak_medsos'));
 		}
@@ -192,7 +192,7 @@ class FooterAdmin extends CI_Controller {
 
 	public function ubahKontakMedsos($id){
 		$data['title']  		= 'Ubah Kontak Medsos';
-		$data['kontak_medsos']	= $this->mFooter->getKontakMedsosById($id);
+		$data['kontak_medsos']	= $this->MFooter->getKontakMedsosById($id);
 		$this->form_validation->set_rules('nama', 'Field ini', 'required');
 		$this->form_validation->set_rules('icon', 'Field ini', 'required');
 		$this->form_validation->set_rules('url', 'Field url', 'required');
@@ -203,14 +203,14 @@ class FooterAdmin extends CI_Controller {
 			$this->load->view('admin/kontak_medsos/ubahKontakMedsos');
 			$this->load->view('admin/template/footer');
 		}else {
-			$this->mFooter->ubahKontakMedsos($id);
+			$this->MFooter->ubahKontakMedsos($id);
 			$this->session->set_flashdata('alert', 'Diubah');
 			redirect(base_url('admin/kontak_medsos'));
 		}
 	}
 
 	public function hapusKontakMedsos($id){
-		$this->mFooter->hapusKontakMedsos($id);
+		$this->MFooter->hapusKontakMedsos($id);
 		$this->session->set_flashdata('alert', 'Dihapus');
 		redirect(base_url('admin/kontak_medsos'));
 	}

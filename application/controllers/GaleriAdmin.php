@@ -12,7 +12,7 @@ class GaleriAdmin extends CI_Controller {
 // ################ CRUD DATA GALERI #####################//
 	public function index(){
 		$data['title']  = 'Galeri';
-		$data['galeri'] = $this->mGaleri->getGaleri();
+		$data['galeri'] = $this->MGaleri->getGaleri();
 
 		$this->load->view('admin/template/header',$data);
 		$this->load->view('admin/template/navbar');
@@ -22,7 +22,7 @@ class GaleriAdmin extends CI_Controller {
 
 	public function tambahGaleri(){
 		$data['title']  = 'Tambah Galeri';
-		$data['galeri'] = $this->mGaleri->getGaleri();
+		$data['galeri'] = $this->MGaleri->getGaleri();
 		$this->form_validation->set_rules('kegiatan', 'Nama kegiatan', 'required');
 		$this->form_validation->set_rules('sampul_kegiatan', 'Sampul', 'required');
 		// fungsi upload gambar
@@ -38,7 +38,7 @@ class GaleriAdmin extends CI_Controller {
         if (!$galeri_img) {
         	$error =  $this->upload->display_errors();
         }else {
-	        $this->mGaleri->tambahGaleri($galeri_img);
+	        $this->MGaleri->tambahGaleri($galeri_img);
 	        $this->session->set_flashdata('alert', 'Ditambahkan');
 	        redirect(base_url('admin/galeri'));
         }
@@ -46,7 +46,7 @@ class GaleriAdmin extends CI_Controller {
 
 	public function ubahGaleri($id){
 		$data['title']  = 'Ubah data galeri';
-		$data['galeri'] = $this->mGaleri->getGaleriById($id);
+		$data['galeri'] = $this->MGaleri->getGaleriById($id);
 		
 		if ($this->input->method() == "post") {
 			$this->updateGaleri($id);
@@ -63,7 +63,7 @@ class GaleriAdmin extends CI_Controller {
 
 		$galeri = $this->db->get_where("galeri", ["id" => $id])->row();
 		$galeri_img = $this->uploadGambar("sampul_kegiatan", $galeri->sampul);
-		$this->mGaleri->ubahGaleri($galeri_img);
+		$this->MGaleri->ubahGaleri($galeri_img);
 		$this->session->set_flashdata('alert', 'Diubah');
 		redirect(base_url('admin/galeri'));
 	}
@@ -90,7 +90,7 @@ class GaleriAdmin extends CI_Controller {
 			$target_file = "./public/img/galeri/". $item->sampul;
 			unlink($target_file);
 		}
-		$this->mGaleri->hapusGaleri($id);
+		$this->MGaleri->hapusGaleri($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/galeri'));
 	}
@@ -103,7 +103,7 @@ class GaleriAdmin extends CI_Controller {
 // ################ CRUD DETAIL GALERI #####################//
 	public function detailGaleri($id){
 		$data['title'] 		   = 'Detail Galeri';
-		$data['detail_galeri'] = $this->mGaleri->getDetailGaleri($id);
+		$data['detail_galeri'] = $this->MGaleri->getDetailGaleri($id);
 		$data['id_galeri'] 	   = $this->uri->segment('3'); // mengambil parameter id_galeri dari url
 
 		$this->load->view('admin/template/header', $data);
@@ -114,7 +114,7 @@ class GaleriAdmin extends CI_Controller {
 
 	public function tambahDetailGaleri($id){
 		$data['title']  = 'Tambah Detail Galeri';
-		$data['galeri'] = $this->mGaleri->getGaleriById($id);
+		$data['galeri'] = $this->MGaleri->getGaleriById($id);
 		$this->form_validation->set_rules('id_galeri', 'Field ini', 'required');
 		$this->form_validation->set_rules('gambar', 'Gambar', 'required');
 		// fungsi upload gambar
@@ -130,7 +130,7 @@ class GaleriAdmin extends CI_Controller {
 		if (!$data_gambar){
 		    $error = $this->upload->display_errors();
 		}else {
-			$this->mGaleri->tambahDetailGaleri($data_gambar);
+			$this->MGaleri->tambahDetailGaleri($data_gambar);
 			$this->session->set_flashdata('alert','Ditambahkan');
 			redirect(base_url('admin/detail-galeri/'.$id ));
 		}
@@ -139,7 +139,7 @@ class GaleriAdmin extends CI_Controller {
 	// id_galeri:tabel galeri, id_detail:tabel detail_galeri
 	public function ubahDetailGaleri($id_detail){
 		$data['title'] 		     = 'Ubah detail galeri';
-		$data['detail_galeri']   = $this->mGaleri->getDetailGaleriById($id_detail);
+		$data['detail_galeri']   = $this->MGaleri->getDetailGaleriById($id_detail);
 		$data['kegiatan']		 = $this->db->get("galeri")->result();
 		
 		if ($this->input->method() == "post") {
@@ -158,7 +158,7 @@ class GaleriAdmin extends CI_Controller {
 		$id_galeri = $this->input->post("id_galeri");
 		$detail_galeri = $this->db->get_where("detail_galeri", ["id" => $id_detail])->row();
 		$image = $this->uploadGambar("gambar", $detail_galeri->gambar);
-		$this->mGaleri->ubahDetailGaleri($image);
+		$this->MGaleri->ubahDetailGaleri($image);
 		$this->session->set_flashdata('alert', 'Diubah');
 		redirect(base_url('admin/detail-galeri/'.$id_galeri));
 	}
@@ -169,7 +169,7 @@ class GaleriAdmin extends CI_Controller {
 			$target_file = "./public/img/galeri/". $item->gambar;
 			unlink($target_file);
 		}
-		$this->mGaleri->hapusDetailGaleri($id_detail);
+		$this->MGaleri->hapusDetailGaleri($id_detail);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/detail-galeri/'.$id_galeri));
 	}

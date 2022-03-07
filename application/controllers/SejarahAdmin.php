@@ -4,7 +4,7 @@ class SejarahAdmin extends CI_Controller {
 
 	public function index(){
 		$data['title'] = 'Sejarah';
-		$data['sejarah'] = $this->mSejarah->getSejarah();
+		$data['sejarah'] = $this->MSejarah->getSejarah();
 
 		$this->load->view('admin/template/header',$data);
 		$this->load->view('admin/template/navbar');
@@ -23,7 +23,7 @@ class SejarahAdmin extends CI_Controller {
 			$this->load->view('admin/sejarah/tambahSejarah');
 			$this->load->view('admin/template/footer');
 		} else {
-			$this->mSejarah->tambahSejarah();
+			$this->MSejarah->tambahSejarah();
 			$this->session->set_flashdata('alert','Ditambahkan');
 			redirect(base_url('admin/sejarah' ));
 		}
@@ -31,7 +31,7 @@ class SejarahAdmin extends CI_Controller {
 
 	public function ubahSejarah($id){
 		$data['title'] = 'Ubah Sejarah';
-		$data['sejarah'] = $this->mSejarah->getSejarahById($id);
+		$data['sejarah'] = $this->MSejarah->getSejarahById($id);
 		$this->form_validation->set_rules('judul', 'Judul', 'required');
 		$this->form_validation->set_rules('sejarah', 'Sejarah', 'required');
 
@@ -41,14 +41,14 @@ class SejarahAdmin extends CI_Controller {
 			$this->load->view('admin/sejarah/ubahSejarah',$data);
 			$this->load->view('admin/template/footer');
 		} else {
-			$this->mSejarah->ubahSejarah();
+			$this->MSejarah->ubahSejarah();
 			$this->session->set_flashdata('alert','Diubah');
 			redirect(base_url('admin/sejarah' ));
 		}
 	}
 
 	public function hapusSejarah($id){
-		$this->mSejarah->hapusSejarah($id);
+		$this->MSejarah->hapusSejarah($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/sejarah'));
 	}

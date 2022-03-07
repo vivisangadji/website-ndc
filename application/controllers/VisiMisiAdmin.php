@@ -8,7 +8,7 @@ class VisiMisiAdmin extends CI_Controller{
 
 	public function index(){
 		$data['title'] = 'Visi Misi';
-		$data['visi_misi'] = $this->mVisiMisi->getVisiMisi();
+		$data['visi_misi'] = $this->MVisiMisi->getVisiMisi();
 
 		$this->load->view('admin/template/header', $data);
 		$this->load->view('admin/template/navbar');
@@ -27,7 +27,7 @@ class VisiMisiAdmin extends CI_Controller{
 			$this->load->view('admin/visimisi/tambahVisiMisi');
 			$this->load->view('admin/template/footer');
 		} else {
-			$this->mVisiMisi->tambahVisiMisi();
+			$this->MVisiMisi->tambahVisiMisi();
 			$this->session->set_flashdata('alert','Ditambahkan');
 			redirect(base_url('admin/visimisi' ));
 		}
@@ -36,7 +36,7 @@ class VisiMisiAdmin extends CI_Controller{
 
 	public function ubahVisiMisi($id){
 		$data['title'] = 'Ubah Visi Misi';
-		$data['visi_misi'] = $this->mVisiMisi->getVisiMisiById($id);
+		$data['visi_misi'] = $this->MVisiMisi->getVisiMisiById($id);
 		$this->form_validation->set_rules('visi', 'Visi', 'required');
 		$this->form_validation->set_rules('misi', 'Misi', 'required');
 
@@ -46,14 +46,14 @@ class VisiMisiAdmin extends CI_Controller{
 			$this->load->view('admin/visimisi/ubahVisiMisi',$data);
 			$this->load->view('admin/template/footer');
 		} else {
-			$this->mVisiMisi->ubahVisiMisi();
+			$this->MVisiMisi->ubahVisiMisi();
 			$this->session->set_flashdata('alert','Diubah');
 			redirect(base_url('admin/visimisi' ));
 		}
 	}
 
 	public function hapusVisiMisi($id){
-		$this->mVisiMisi->hapusVisiMisi($id);
+		$this->MVisiMisi->hapusVisiMisi($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/visimisi'));
 	}

@@ -5,7 +5,7 @@ class ArtikelAdmin extends CI_Controller {
 
 	public function index(){
 		$data['title']   	= 'Artikel';
-		$data['artikels']	= $this->mArtikel->getArtikel();
+		$data['artikels']	= $this->MArtikel->getArtikel();
 
 		$this->load->view('admin/template/header', $data);
 		$this->load->view('admin/template/navbar');
@@ -15,8 +15,8 @@ class ArtikelAdmin extends CI_Controller {
 
 	public function tambahArtikel(){
 		$data['title']  	 = 'Tambah Artikel';
-		$data['kategoris'] 	 = $this->mArtikel->getAllKategori();
-		$data['subKategoris'] = $this->mArtikel->getAllSubKategori();
+		$data['kategoris'] 	 = $this->MArtikel->getAllKategori();
+		$data['subKategoris'] = $this->MArtikel->getAllSubKategori();
 		/* set rules form input */
 		$this->form_validation->set_rules('judul', 'Judul', 'required');
 		$this->form_validation->set_rules('konten', 'Konten', 'required');
@@ -40,7 +40,7 @@ class ArtikelAdmin extends CI_Controller {
         }else {
 			$this->upload->do_upload("sampul");
 			$sampul 	   = $this->upload->data("file_name");
-			$this->mArtikel->tambahArtikel($sampul, $author_sampul);
+			$this->MArtikel->tambahArtikel($sampul, $author_sampul);
 			$this->session->set_flashdata('alert', 'Ditambahkan');
 			redirect(base_url('admin/artikel'));
 		}
@@ -48,9 +48,9 @@ class ArtikelAdmin extends CI_Controller {
 
 	public function ubahArtikel($id){
 		$data['title']	 	  = 'Ubah Artikel';
-		$data['artikel'] 	  = $this->mArtikel->getArtikelById($id);
-		$data['kategoris'] 	  = $this->mArtikel->getAllKategori();
-		$data['subKategoris'] = $this->mArtikel->getAllSubKategori();
+		$data['artikel'] 	  = $this->MArtikel->getArtikelById($id);
+		$data['kategoris'] 	  = $this->MArtikel->getAllKategori();
+		$data['subKategoris'] = $this->MArtikel->getAllSubKategori();
 		$id_sub = explode(",", $data['artikel']->id_subkategori);
 		$data['id_subkategori'] = $id_sub;
 
@@ -111,7 +111,7 @@ class ArtikelAdmin extends CI_Controller {
 			unlink($sampul);
 			unlink($author_sampul);
 		}
-		$this->mArtikel->hapusArtikel($id);
+		$this->MArtikel->hapusArtikel($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/artikel'));
 	}

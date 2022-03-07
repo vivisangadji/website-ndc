@@ -9,7 +9,7 @@ class CarouselAdmin extends CI_Controller {
 	}
 
 	public function index(){
-		$data['carousel'] = $this->mCarousel->getCarousel();
+		$data['carousel'] = $this->MCarousel->getCarousel();
 		$data['title'] = 'Carousel';
 
 		$this->load->view('admin/template/header',$data);
@@ -41,7 +41,7 @@ class CarouselAdmin extends CI_Controller {
 			$carousel = $this->db->order_by("urutan", "DESC")->get("carousel")->result();
 			$getUrutan = $carousel[0]->urutan; 
 			
-			$this->mCarousel->tambahCarousel($data_gambar, $getUrutan+=1);
+			$this->MCarousel->tambahCarousel($data_gambar, $getUrutan+=1);
 			$this->session->set_flashdata('alert','Ditambahkan');
 			redirect(base_url('admin/carousel'));
 		}
@@ -49,7 +49,7 @@ class CarouselAdmin extends CI_Controller {
 
 	public function ubahCarousel($id){
 		$data['title'] = 'Ubah Carousel';
-		$data['carousel'] = $this->mCarousel->getCarouselById($id);
+		$data['carousel'] = $this->MCarousel->getCarouselById($id);
 
 		if ($this->input->method() == "post") {
 			$this->updateCarousel($id);
@@ -68,7 +68,7 @@ class CarouselAdmin extends CI_Controller {
 
 		$carousel = $this->db->get_where("carousel", ["id" => $id])->row();
 		$carousel_img = $this->uploadGambar("gambar", $carousel->img);
-		$this->mCarousel->ubahCarousel($carousel_img);
+		$this->MCarousel->ubahCarousel($carousel_img);
 		$this->session->set_flashdata("alert", "diubah");
 		redirect(base_url("admin/carousel"));
 	}
@@ -95,7 +95,7 @@ class CarouselAdmin extends CI_Controller {
 			$target_file = "./public/img/carousel/". $item->img;
 			unlink($target_file);
 		}
-		$this->mCarousel->hapusCarousel($id);
+		$this->MCarousel->hapusCarousel($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/carousel'));
 	}

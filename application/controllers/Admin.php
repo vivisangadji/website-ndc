@@ -31,7 +31,7 @@ class Admin extends CI_Controller {
 			$data['title'] = 'Login';
 			$this->load->view('admin/login', $data);
 		}else {
-			$cek = $this->mAdmin->cekLogin(); // cek di model apa username dan pass yg diisi sesuai dengan yg di database
+			$cek = $this->MAdmin->cekLogin(); // cek di model apa username dan pass yg diisi sesuai dengan yg di database
 			
 			if ($cek) {
 				$this->session->set_userdata('status', 'login');
@@ -53,7 +53,7 @@ class Admin extends CI_Controller {
 
 	public function komentar(){
 		$data['title']    = 'Komentar';
-		$data['komentar'] = $this->mAdmin->getAllKomentar();
+		$data['komentar'] = $this->MAdmin->getAllKomentar();
 
 		$this->load->view('admin/template/header', $data);
 		$this->load->view('admin/template/navbar');

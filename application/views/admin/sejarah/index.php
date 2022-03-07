@@ -11,7 +11,7 @@
           <?php endif ?>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <table class="table table-bordered">
           <a href="<?= base_url('admin/tambahSejarah') ?>" class="btn btn-primary mb-2">
           <i class="fas fa-plus"></i> Tambah Sejarah

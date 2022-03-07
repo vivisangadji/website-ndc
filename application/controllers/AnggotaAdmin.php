@@ -8,7 +8,7 @@ class AnggotaAdmin extends CI_Controller {
 
 	public function index(){
 		$data['title']   = 'Anggota';
-		$data['anggota'] = $this->mAnggota->getAnggota();
+		$data['anggota'] = $this->MAnggota->getAnggota();
 
 		$this->load->view('admin/template/header',$data);
 		$this->load->view('admin/template/navbar');
@@ -37,7 +37,7 @@ class AnggotaAdmin extends CI_Controller {
 		if (!$gambar_anggota) {
 			return $error = $this->upload->display_errors();
 		} else {
-			$this->mAnggota->tambahAnggota($gambar_anggota);
+			$this->MAnggota->tambahAnggota($gambar_anggota);
 			$this->session->set_flashdata('alert','Ditambahkan');
 			redirect(base_url('admin/anggota' ));
 		}
@@ -45,7 +45,7 @@ class AnggotaAdmin extends CI_Controller {
 
 	public function ubahAnggota($id){
 		$data['title']   = 'Ubah Data Anggota';
-		$data['anggota'] = $this->mAnggota->getAnggotaById($id);
+		$data['anggota'] = $this->MAnggota->getAnggotaById($id);
 
 		if ($this->input->method() == "post") {
 			$this->updateAnggota($id);
@@ -65,7 +65,7 @@ class AnggotaAdmin extends CI_Controller {
 		
 		$anggota = $this->db->get_where("anggota", ["id" => $id])->row();
 		$data_gambar = $this->uploadGambar("gambar", $anggota->gambar);
-		$this->mAnggota->ubahAnggota($data_gambar);
+		$this->MAnggota->ubahAnggota($data_gambar);
 		$this->session->set_flashdata('alert','Diubah');
 		redirect(base_url('admin/anggota' ));
 	}
@@ -92,7 +92,7 @@ class AnggotaAdmin extends CI_Controller {
 			$target_file = "./public/img/anggota/". $item->gambar;
 			unlink($target_file);
 		}
-		$this->mAnggota->hapusAnggota($id);
+		$this->MAnggota->hapusAnggota($id);
 		$this->session->set_flashdata('alert','Dihapus');
 		redirect(base_url('admin/anggota'));
 	}
